@@ -13,9 +13,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Form />}  />
-        <Route path='/Middle' element={<Protected><Middleman /></ Protected>}  />
-        <Route path='/Login' element = {<Protected><Login /></Protected>} />
-        <Route path='/Scan' element={<Protected><Scanner /></Protected>}  />
+        <Route path='/Middle' element={<Middleman />}  />
+        <Route path='/Login' element = {<Login />} />
+        <Route path='/Scan' element={<Scanner />}  />
       </Routes>
     </BrowserRouter>
     </AuthProvider>
