@@ -36,10 +36,19 @@ class Form extends Component {
 
 
   render() {
-    const handleSubmit = (e) =>{
+    const handleSubmit = async(e) =>{
     e.preventDefault()
     console.log(this.state);
-    axios.post('http://localhost:4000/app/foodPreference', this.state);
+    const response = await axios.post('https://vfms-backend.onrender.com/foodPreference', this.state);
+    if (response.status==201) {
+      alert("Successfully Verifed") 
+    }
+    this.setState({
+      name: '',
+      preference: '',
+      phone: ''
+    })
+    
   }
     return (
         <div class="login-box">
