@@ -48,16 +48,18 @@ function Login() {
         })
         const response = await axios({
             method:'post',
-            url: 'http://localhost:4000/app/login',
+            url: 'https://vfms-backend.onrender.com/login',
             data: state
         })
         setComment(response.data.email)
+
+
         if(comment==state.email){
             auth.login(comment)
-            navigate('/Upload', {replace:true})
+            navigate('/Middle', {replace:true})
         }
         else{
-            alert('Incorrect username and password')
+            alert('Incorrect username or password')
             console.log(comment);
         }
         
