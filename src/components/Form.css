@@ -11,6 +11,7 @@ html {
     background-position: center center;
 
   }  
+
   .login-box {
     position: absolute;
     top: 50%;
@@ -22,6 +23,19 @@ html {
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
+  }
+  @media screen and (max-width: 768px) {
+    .login-box{
+      top: 50%;
+      left: 49.5%;
+      width: 90%;
+      padding: 70px;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,.5);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 10px;
+  }
   }
   
   .login-box h2 {

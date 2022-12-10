@@ -40,8 +40,8 @@ class Form extends Component {
     e.preventDefault()
     console.log(this.state);
     const response = await axios.post('https://vfms-backend.onrender.com/foodPreference', this.state);
-    if (response.status==201) {
-      alert("Successfully Verifed") 
+    if (response.status===201) {
+      alert("Successfully Submitted") 
     }
     this.setState({
       name: '',
