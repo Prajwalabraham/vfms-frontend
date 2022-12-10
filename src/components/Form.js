@@ -36,12 +36,15 @@ class Form extends Component {
 
 
   render() {
-    const handleSubmit = async(e) =>{
+    const handleSubmit = (e) =>{
     e.preventDefault()
     console.log(this.state);
-    const response = await axios.post('https://vfms-server.onrender.com/foodPreference', this.state);
-    if (response.status===201) {
+    const response = axios.post('https://vfms-server.onrender.com/foodPreference', this.state);
+    if (response.status==201) {
       alert("Successfully Submitted") 
+    }
+    else{
+      alert("You have already applied")
     }
     this.setState({
       name: '',
