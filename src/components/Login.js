@@ -32,7 +32,7 @@ function Login() {
         })
         axios({
             method:'post',
-            url: 'https://vfms-backend.onrender.com/signup',
+            url: 'https://vfms-server.onrender.com/signup',
             data: state
         })
     }
@@ -48,7 +48,7 @@ function Login() {
         })
         const response = await axios({
             method:'post',
-            url: 'https://vfms-backend.onrender.com/login',
+            url: 'https://vfms-server.onrender.com/login',
             data: state
         })
         setComment(response.data.email)

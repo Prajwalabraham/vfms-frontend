@@ -11,7 +11,7 @@ function View() {
   const viewData = async(e) =>{
     const result = await axios({
       method:'get',
-      url: 'https://vfms-backend.onrender.com/viewKitchen',
+      url: 'https://vfms-server.onrender.com/viewKitchen',
     }) 
     setData(result);
   }

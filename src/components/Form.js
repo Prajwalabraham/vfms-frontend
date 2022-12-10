@@ -39,7 +39,7 @@ class Form extends Component {
     const handleSubmit = async(e) =>{
     e.preventDefault()
     console.log(this.state);
-    const response = await axios.post('https://vfms-backend.onrender.com/foodPreference', this.state);
+    const response = await axios.post('https://vfms-server.onrender.com/foodPreference', this.state);
     if (response.status===201) {
       alert("Successfully Submitted") 
     }

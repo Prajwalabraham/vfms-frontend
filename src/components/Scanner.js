@@ -36,7 +36,7 @@ const Scanner = (props) => {
     console.log(verifyData)
     const response = await axios({
       method:'post',
-      url: 'https://vfms-backend.onrender.com/verify',
+      url: 'https://vfms-server.onrender.com/verify',
       data: verifyData
   })
   if (response.status==201) {
