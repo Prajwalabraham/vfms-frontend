@@ -54,11 +54,13 @@ function Login() {
             url: 'https://vfms-server.onrender.com/login',
             data: state
         })
-        setComment(response.data.Email)
+        setComment(response.data)
+        console.log(response);
 
 
-        if(comment==state.email){
-            auth.login(comment)
+        if(response.status == 200){
+            auth.login(state.email)
+            console.log(response.data);
             navigate('/Middle', {replace:true})
         }
         else{
