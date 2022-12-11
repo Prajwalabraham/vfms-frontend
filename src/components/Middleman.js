@@ -22,7 +22,7 @@ function Middleman() {
     <div className='login_box'>
         <div className='qr-scanner'>
             <a href="" onClick={handleClickScan}><QrCodeScannerIcon 
-            sx={{fontSize: 250}}
+            sx={{fontSize: 200}}
             color= "primary"
             /></a>
             <div className='scan_button'>

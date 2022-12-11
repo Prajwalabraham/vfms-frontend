@@ -2,7 +2,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
+    width: 340px;
     padding: 70px;
     transform: translate(-50%, -50%);
     background: rgba(0,0,0,.5);
@@ -11,6 +11,19 @@
     border-radius: 10px;
   }
   
+  @media screen and (max-width: 768px) {
+    .login-box{
+      top: 50%;
+      left: 50%;
+      width: 90%;
+      padding: 70px;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,.5);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 10px;
+  }
+  }
  .scan_button button{
     border-radius: 20px;
     border-color: white;
