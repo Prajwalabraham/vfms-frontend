@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import "./Form.css";
 import axios from 'axios';
+import './Form.css'
 
 class Form extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class Form extends Component {
   
     this.state = {
        name: '',
-       preference: 'Preference',
+       preference: '',
        phone:''
     }
   }
@@ -38,6 +38,19 @@ class Form extends Component {
   render() {
     const handleSubmit = async(e) =>{
     e.preventDefault()
+    if (this.state.name == '' && this.state.phone == '' && this.state.preference == '') {
+      alert("All Inputs are Required!!!")
+
+    }
+    else if (this.state.name == '') {
+      alert("Name is Required!")
+    } else if (this.state.phone=='') {
+      alert("Phone is Required!")
+    }
+    else if (this.state.preference == '') {
+      alert("Phone is Required!")
+    }
+    else{
     console.log(this.state);
     const response = await axios({
       method:'post',
@@ -47,12 +60,15 @@ class Form extends Component {
     if (response.status==201) {
       alert("Successfully Submitted") 
     }
+    else if (response.status==406) {
+      alert("You have already submitted the form this week...!");
+    }
     this.setState({
       name: '',
       preference: '',
       phone: ''
     })
-    
+  }
   }
     return (
         <div class="login-box">
@@ -62,11 +78,11 @@ class Form extends Component {
           <form onSubmit={handleSubmit} >
             <div class="user-box">
               <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} />
-              <label>Your Name</label>
+              <label>Your Name *</label>
             </div>
             <div class="user-box">
               <input type="text" name="phone" value={this.state.phone} onChange={this.handlePhoneChange} />
-              <label>Phone Number</label>
+              <label>Phone Number *</label>
             </div>
             <div class='wrapper'>
               <input type="radio" name="select" id="option-1" value='NON-VEG' checked={this.state.preference === 'NON-VEG'} onChange={this.onValueChange} />
