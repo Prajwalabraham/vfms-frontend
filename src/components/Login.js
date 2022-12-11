@@ -22,7 +22,7 @@ function Login() {
         })
     }
 
-    const handleSignupSubmit = (e) => {
+    const handleSignupSubmit = async(e) => {
         e.preventDefault()
         console.log(state);
         setState({
@@ -30,11 +30,14 @@ function Login() {
             password:'',
             email:''
         })
-        axios({
+        const response = await axios({
             method:'post',
             url: 'https://vfms-server.onrender.com/signup',
             data: state
         })
+        if (response.status==201) {
+            alert("User Successfully Created!")
+        }
     }
 
     
@@ -51,7 +54,7 @@ function Login() {
             url: 'https://vfms-server.onrender.com/login',
             data: state
         })
-        setComment(response.data.email)
+        setComment(response.data.Email)
 
 
         if(comment==state.email){
