@@ -81,7 +81,7 @@ class Form extends Component {
               <label>Your Name *</label>
             </div>
             <div class="user-box">
-              <input type="text" name="phone" value={this.state.phone} onChange={this.handlePhoneChange} />
+              <input type="text" name="phone"  value={this.state.phone} onChange={this.handlePhoneChange} />
               <label>Phone Number *</label>
             </div>
             <div class='wrapper'>
