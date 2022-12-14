@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import './Form.css'
+import CircularProgress from '@mui/material/CircularProgress';
 
 class Form extends Component {
   constructor(props) {
@@ -9,10 +10,19 @@ class Form extends Component {
     this.state = {
        name: '',
        preference: '',
-       phone:''
+       phone:'',
+       loading: false
     }
   }
   
+  toggleLoader = () => {
+    if(!this.state.loading){
+      this.setState({loading: true})
+    }else{
+      this.setState({loading: false})
+    }
+ }
+
   handleNameChange = (e) => {
     this.setState({
       name: e.target.value
@@ -38,6 +48,7 @@ class Form extends Component {
   render() {
     const handleSubmit = async(e) =>{
     e.preventDefault()
+    this.setState({loading: true})
     if (this.state.name == '' && this.state.phone == '' && this.state.preference == '') {
       alert("All Inputs are Required!!!")
 
@@ -57,16 +68,33 @@ class Form extends Component {
       url: "https://vfms-server.onrender.com/foodPreference",
       data: this.state
     })
-    if (response.status==201) {
-      alert("Successfully Submitted") 
-    }
-    else if (response.status==406) {
-      alert("You have already submitted the form this week...!");
-    }
+    .then(res => {
+      if (response.status==201) {
+        alert("Successfully Submitted") 
+      }
+      this.setState({
+        name: '',
+        preference: '',
+        phone: '',
+        loading: false
+      })
+      
+    })
+    .catch(err => {
+      console.log(err.response.status);
+      if (err.response.status==406) {
+        alert("You have already submitted the form this week...!");
+      }
+      else{
+        alert('There is an internal Server error. Kindly report to the IT team')
+      }
+    })
+
     this.setState({
       name: '',
       preference: '',
-      phone: ''
+      phone: '',
+      loading: false
     })
   }
   }
@@ -96,7 +124,8 @@ class Form extends Component {
                       <span>VEG</span>
                   </label>
             </div>
-            <div>            
+            <div> 
+            {this.state.loading ?  <CircularProgress /> :            
             <a href="#" onClick={handleSubmit}>
               <span></span>
               <span></span>
@@ -104,8 +133,10 @@ class Form extends Component {
               <span></span>
               Submit
             </a>
+  }
             </div>
-          </form>
+          </form> 
+
         </div>
     )
   }

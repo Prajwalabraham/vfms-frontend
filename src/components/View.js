@@ -10,10 +10,11 @@ function View() {
 
   const viewData = async(e) =>{
     const result = await axios({
-      method:'get',
+      method:'post',
       url: 'https://vfms-server.onrender.com/viewKitchen',
     }) 
     setData(result);
+    console.log(data);
   }
 
 
