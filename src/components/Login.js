@@ -3,6 +3,7 @@ import './Login.css'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from './auth'
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Login() {
     const [state, setState] = React.useState({
@@ -13,6 +14,7 @@ function Login() {
     const auth = useAuth()
     const [comment, setComment] = React.useState();
     const navigate = useNavigate();
+    const [loading, setLoading] = React.useState(false);
 
     function handleChange(event) {
         const value = event.target.value;
@@ -24,6 +26,7 @@ function Login() {
 
     const handleSignupSubmit = async(e) => {
         e.preventDefault()
+        setLoading(true)
         console.log(state);
         setState({
             username:'',
@@ -38,11 +41,13 @@ function Login() {
         if (response.status==201) {
             alert("User Successfully Created!")
         }
+        setLoading(false)
     }
 
     
     const handleLoginSubmit = async(e) => {
         e.preventDefault();
+        setLoading(true)
         console.log(state);
         setState({
             username:'',
@@ -68,7 +73,7 @@ function Login() {
             console.log(comment);
         }
         
-        
+        setLoading(false)
         //console.log(comment);
 
     }
@@ -86,7 +91,9 @@ function Login() {
 					<input type="text" name="username" placeholder="User name" required="" onChange={handleChange} value={state.username} />
 					<input type="email" name="email" placeholder="Email" required="" onChange={handleChange} value={state.email} />
 					<input type="password" name="password" placeholder="Password" required="" onChange={handleChange} value={state.password} />
-					<button>Sign up</button>
+					{loading ?  <CircularProgress /> :
+                    <button>Sign up</button>
+  }
 				</form>
 			</div>
 
@@ -95,7 +102,9 @@ function Login() {
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="email" name="email" placeholder="Email" required="" onChange={handleChange} value={state.email} />
 					<input type="password" name="password" placeholder="Password" required="" onChange={handleChange} value={state.password} />
+                    {loading ?  <CircularProgress /> :
 					<button>Login</button>
+}
 				</form>
 			</div>
 	</div>

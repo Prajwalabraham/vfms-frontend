@@ -22,9 +22,7 @@ function App() {
           </Protected>}  />
         <Route path='/Login' element = {<Login />} />
         <Route path='/View' element={
-        <Protected>
-          <View />
-        </Protected>}  />
+          <Protected><View /></Protected>}  />
         <Route path='/Scan' element={<Protected><Scanner /></Protected>}  />
       </Routes>
     </BrowserRouter>
