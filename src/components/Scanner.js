@@ -12,6 +12,8 @@ const Scanner = (props) => {
   useEffect(() => {
     document.title = 'QR Scanner';
   }, []);
+
+  const navigate = useNavigate()
   
   const handleScan = async(scanData) => {
     setLoadingScan(true);
@@ -26,6 +28,9 @@ const Scanner = (props) => {
     }
   };
 
+  const View = (e) => {
+    navigate('/View')
+  }
 
   const handleError = (err) => {
     console.error(err);
@@ -73,6 +78,7 @@ const Scanner = (props) => {
     {loadingScan && <p>Loading</p>}
     {data !== "" && <p>{data}</p>}
     {data !=="" && <button type="" onClick={handleVerify} >Verify</button>}
+    <button onClick={View}>View</button>
   </div>
   );
 };
