@@ -69,7 +69,8 @@ class Form extends Component {
       data: this.state
     })
     .then(res => {
-      if (response.status==201) {
+      console.log(res);
+      if (res.status==201) {
         alert("Successfully Submitted") 
       }
       this.setState({
