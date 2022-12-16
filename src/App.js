@@ -7,6 +7,7 @@ import Protected from './components/Protected'
 import { AuthProvider } from './components/auth'
 import Middleman from './components/Middleman'
 import View from "./components/View";
+import QrCodeGenerator from './components/QrCodeGenerator';
 
 function App() {
   useEffect(() => {
@@ -24,6 +25,8 @@ function App() {
         <Route path='/View' element={
           <Protected><View /></Protected>}  />
         <Route path='/Scan' element={<Protected><Scanner /></Protected>}  />
+        <Route path='/QR' element={<QrCodeGenerator />}  />
+
       </Routes>
     </BrowserRouter>
     </AuthProvider>
