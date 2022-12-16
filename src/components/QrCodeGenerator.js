@@ -19,7 +19,7 @@ function QrCodeGenerator() {
 	const GenerateQRCode = (e) => {
     e.preventDefault()
 		QRCode.toDataURL(value, {
-      width:150,
+      width:200,
 			margin: 2,
 			color: {
 				dark: '#335383FF',
