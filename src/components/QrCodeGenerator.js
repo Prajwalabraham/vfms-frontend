@@ -29,11 +29,20 @@ function QrCodeGenerator() {
   ]
 
   const [loading, setLoading] = useState(false);
+  const [requiredName, setRequiredName] = useState(true);
+  const [requiredPhone, setRequiredPhone] = useState(true);
+  const [requiredEmail, setRequiredEmail] = useState(true);
 
 	const [qr, setQr] = useState('')
 
 	const GenerateQRCode = (e) => {
     e.preventDefault()
+    if (state.name == '' && state.phone == '' && state.email == '') {
+      setRequiredName(false)
+      setRequiredPhone(false)
+      setRequiredEmail(false)
+    }
+    else{
 		QRCode.toDataURL(value, {
 			margin: 2,
 			color: {
@@ -47,6 +56,11 @@ function QrCodeGenerator() {
 			setQr(value)
       console.log(state);
 		})
+    
+    setRequiredName(true)
+    setRequiredPhone(true)
+    setRequiredEmail(true)
+  }
 	}
 
 
@@ -114,7 +128,10 @@ function QrCodeGenerator() {
   return (
     <div className='login-box'>
         <form>
-            <input name='name'  placeholder='Name' value={state.name} onChange={handleChange} />            
+          <input name='name'  placeholder='Name' value={state.name} onChange={handleChange} />
+          {requiredName ? '' : 
+          <label>Your name is Required!!</label>
+          }      
             <input name='phone'  placeholder='Phone' value={state.phone} onChange={handleChange} />
             <input name='email' placeholder='Email' value={state.email} onChange={handleChange} />
             <Select
