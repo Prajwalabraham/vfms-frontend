@@ -21,3 +21,7 @@ img{
 .SelectTeama:hover {
     background-color: rgb(121, 121, 121);
   }
+.login-box .Stack{
+    width: 72%;
+    padding-left: 14%;
+}

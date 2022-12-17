@@ -6,6 +6,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import './QrCodeGenerator.css'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 function QrCodeGenerator() {
     const [state, setState] = useState({
@@ -32,7 +34,7 @@ function QrCodeGenerator() {
   const [requiredName, setRequiredName] = useState(true);
   const [requiredPhone, setRequiredPhone] = useState(true);
   const [requiredEmail, setRequiredEmail] = useState(true);
-
+  const [isSubmitted, setIsSubmitted] = useState(false);
 	const [qr, setQr] = useState('')
 
 	const GenerateQRCode = (e) => {
@@ -40,6 +42,14 @@ function QrCodeGenerator() {
     if (state.name == '' && state.phone == '' && state.email == '') {
       setRequiredName(false)
       setRequiredPhone(false)
+      setRequiredEmail(false)
+    }
+    else if (state.name == '') {
+      setRequiredName(false)
+    } else if (state.phone=='') {
+      setRequiredPhone(false)
+    }
+    else if (state.email == '') {
       setRequiredEmail(false)
     }
     else{
@@ -70,6 +80,9 @@ function QrCodeGenerator() {
             ...state,
             [event.target.name]: value
         })
+        setRequiredName(true)
+        setRequiredPhone(true)
+        setRequiredEmail(true)
     }
 
     const handleSelect = (e) => {
@@ -79,7 +92,7 @@ function QrCodeGenerator() {
     const value = JSON.stringify(state)
     const handleSubmit = async(e) =>{
       e.preventDefault()
-      if (state.name == '' && state.phone == '' && state.email == '' && state.team=='') {
+      /*if (state.name == '' && state.phone == '' && state.email == '' && state.team=='') {
         alert("All Inputs are Required!!!")
       }
       else if (state.name == '') {
@@ -89,8 +102,8 @@ function QrCodeGenerator() {
       }
       else if (state.preference == '') {
         alert("Phone is Required!")
-      }
-      else{
+      }*/
+      //else{
       setLoading(true)
       const response = await axios({
         method:'post',
@@ -112,7 +125,7 @@ function QrCodeGenerator() {
           alert('There is an internal Server error. Kindly report to the IT team')
         }
       })
-    }
+   // }
       setState({
         name:'',
         phone:'',
@@ -130,10 +143,23 @@ function QrCodeGenerator() {
         <form>
           <input name='name'  placeholder='Name' value={state.name} onChange={handleChange} />
           {requiredName ? '' : 
-          <label>Your name is Required!!</label>
+           <Stack className='Stack'  spacing={2}>
+           <Alert severity='warning' >Name is Required!!</Alert>
+         </Stack>
           }      
             <input name='phone'  placeholder='Phone' value={state.phone} onChange={handleChange} />
+            {requiredPhone ? '' : 
+           <Stack className='Stack'  spacing={2}>
+              <Alert severity='warning' >Phone is Required!!</Alert>
+            </Stack>
+            }   
             <input name='email' placeholder='Email' value={state.email} onChange={handleChange} />
+            {requiredEmail ? '' : 
+           <Stack className='Stack'  spacing={2}>
+              <Alert severity='warning' >Email is Required!!</Alert>
+            </Stack>
+              }   
+              <br/>
             <Select
               className='SelectTeam'
               closeMenuOnSelect={false}
@@ -147,13 +173,15 @@ function QrCodeGenerator() {
         </form>       
         {qr && <>
 				<img src={qr} alt='' />
-        <a href={qr} download="qrcode.png" ><button value="Download" >Download</button></a>
+        <a href={qr} download={`${state.name}.png`} ><button value="Download" >Download</button></a>
 			</>}
       
       {loading ?  <CircularProgress /> :
       <button onClick={handleSubmit}>Submit</button>}
       <br/>       
+        
     </div>
+        
   )
 }
 
