@@ -4,6 +4,8 @@ import QRCode from 'qrcode'
 import { useState } from 'react'
 import CircularProgress from '@mui/material/CircularProgress';
 import './QrCodeGenerator.css'
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 function QrCodeGenerator() {
     const [state, setState] = useState({
@@ -12,6 +14,20 @@ function QrCodeGenerator() {
         email:'',
         team:''
     });
+
+    
+  const animatedComponents = makeAnimated();
+
+  const teams = [
+    {value:'Greeters', label:'Greeters'},
+    {value:'Cleaning', label:'Cleaning'},
+    {value:'Media', label:'Media'},
+    {value:'Intercession', label:'Intercession'},
+    {value:'Kids Church', label:'Kids Church'}
+
+  
+  ]
+
   const [loading, setLoading] = useState(false);
 
 	const [qr, setQr] = useState('')
@@ -19,7 +35,6 @@ function QrCodeGenerator() {
 	const GenerateQRCode = (e) => {
     e.preventDefault()
 		QRCode.toDataURL(value, {
-      width:200,
 			margin: 2,
 			color: {
 				dark: '#335383FF',
@@ -30,6 +45,7 @@ function QrCodeGenerator() {
 
 			console.log(value)
 			setQr(value)
+      console.log(state);
 		})
 	}
 
@@ -42,10 +58,14 @@ function QrCodeGenerator() {
         })
     }
 
+    const handleSelect = (e) => {
+      setState({team:e.value})
+    }
+
     const value = JSON.stringify(state)
     const handleSubmit = async(e) =>{
       e.preventDefault()
-      if (state.name == '' && state.phone == '' && state.email == '') {
+      if (state.name == '' && state.phone == '' && state.email == '' && state.team=='') {
         alert("All Inputs are Required!!!")
       }
       else if (state.name == '') {
@@ -97,7 +117,15 @@ function QrCodeGenerator() {
             <input name='name'  placeholder='Name' value={state.name} onChange={handleChange} />            
             <input name='phone'  placeholder='Phone' value={state.phone} onChange={handleChange} />
             <input name='email' placeholder='Email' value={state.email} onChange={handleChange} />
-            <input name='team' placeholder='Team' value={state.team} onChange={handleChange} />
+            <Select
+              className='SelectTeam'
+              closeMenuOnSelect={false}
+              components={animatedComponents}
+              isMulti={false}
+              options={teams}
+              name='team'
+              onChange={handleSelect}
+            />
       			<button onClick={GenerateQRCode}>Generate</button>
         </form>       
         {qr && <>
@@ -107,7 +135,7 @@ function QrCodeGenerator() {
       
       {loading ?  <CircularProgress /> :
       <button onClick={handleSubmit}>Submit</button>}
-        
+      <br/>       
     </div>
   )
 }

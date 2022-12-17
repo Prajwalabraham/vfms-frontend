@@ -1,4 +1,23 @@
 img{
     max-width: 100%;
     border-radius: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
+@media screen and (max-width:768px) {
+    .SelectTeam{
+        width: auto;
+        margin-left: 10%;
+        margin-right: 10%;
+        color: rgb(0, 0, 0);
+    }
+}
+.SelectTeam{
+    width: auto;
+    margin-left: 16%;
+    margin-right: 16%;
+}
+.SelectTeama:hover {
+    background-color: rgb(121, 121, 121);
+  }
