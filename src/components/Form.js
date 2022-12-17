@@ -86,6 +86,10 @@ class Form extends Component {
       if (err.response.status==406) {
         alert("You have already submitted the form this week...!");
       }
+      else if(err.response.status==403){
+        alert("You need to create QR Code in order to apply for coupons. Kindly contact your team leader!")
+
+      }
       else{
         alert('There is an internal Server error. Kindly report to the IT team')
       }
