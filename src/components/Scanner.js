@@ -2,7 +2,11 @@ import React, {useState, useEffect } from 'react'
 import QrReader from 'react-qr-reader'
 import './Scanner.css';
 import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
 import {useNavigate} from 'react-router-dom';
+import makeAnimated from 'react-select/animated';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 
 const Scanner = (props) => {
@@ -16,12 +20,14 @@ const Scanner = (props) => {
   const navigate = useNavigate()
   
   const handleScan = async(scanData) => {
-    setLoadingScan(true);
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
+      setLoadingScan(true);
       console.log(`loaded >>>`, scanData);
+      const resData= JSON.parse(scanData)
+      console.log(resData);
       setStartScan(false);
-      setData(scanData);
+      setData(resData);
       setLoadingScan(false);
    
       // setPrecScan(scanData);
@@ -35,18 +41,30 @@ const Scanner = (props) => {
   const handleError = (err) => {
     console.error(err);
   };
-
+  
   const handleVerify = async(e) =>{
-    const verifyData = JSON.parse(data)
-    console.log(verifyData)
+    console.log(data)
     const response = await axios({
       method:'post',
       url: 'https://vfms-server.onrender.com/verify',
-      data: verifyData
+      data: data
+  }).then(res => {
+    console.log(res);
+    if (res.status == 201) {
+      alert("Successfully verified")
+    }
+    else{
+      alert("There is an internal Server error. Kindly report to the IT team")
+    }
+  }).catch(err => {
+    if (err.response.status == 400) {
+      alert('Volunteer has not applied for coupons this week.')
+    }
+    else{
+      alert('There is an internal Server error. Kindly report to the IT team')
+
+    }
   })
-  if (response.status==201) {
-    alert("Successfully Verifed")
-  }
   }
 
 
@@ -57,9 +75,10 @@ const Scanner = (props) => {
       Scanner
     </h2>
 
-    <button
+    <button className='scanButton'
       onClick={() => {
         setStartScan(!startScan);
+        setData('')
       }}
     >
       {startScan ? "Stop Scan" : "Start Scan"}
@@ -75,10 +94,26 @@ const Scanner = (props) => {
         />
       </>
     )}
-    {loadingScan && <p>Loading</p>}
-    {data !== "" && <p>{data}</p>}
-    {data !=="" && <button type="" onClick={handleVerify} >Verify</button>}
-    <button onClick={View}>View</button>
+    {loadingScan ? 
+    <CircularProgress />
+    : ''}
+
+    {data == ""? '':''
+        }
+    {data !== "" && <table className='Table'>
+        <tbody className='Table-body' >
+          <tr className='Table-row'><p>Name</p>
+          <td className='Table-data' >{data.state.name}</td>
+          </tr>
+          
+          <tr><p>Team</p>
+          <td className='Table-data'>{data.team}</td>
+          </tr>
+          
+        </tbody>
+      </table>}
+    {data !=="" && <button className='scanButton' type="" onClick={handleVerify} >Verify</button>}
+    <button className='scanButton' onClick={View}>View</button>
   </div>
   );
 };

@@ -24,7 +24,7 @@ function App() {
         <Route path='/Login' element = {<Login />} />
         <Route path='/View' element={
           <Protected><View /></Protected>}  />
-        <Route path='/Scan' element={<Protected><Scanner /></Protected>}  />
+        <Route path='/Scan' element={<Scanner />}  />
         <Route path='/QR' element={<QrCodeGenerator />}  />
 
       </Routes>

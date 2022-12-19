@@ -21,6 +21,16 @@ function View() {
       setData(response.data);
       console.log(data);  
     })
+    .catch(error => {
+      console.log(error);
+      /*if(error.response.status == 400){
+        alert("Volunteer has not applied for coupon this week.")
+      }
+      else{
+
+        alert("Internal server error. Kindly report to the IT team")
+      }*/
+    })
     setLoading(false)
 }
 

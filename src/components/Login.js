@@ -37,10 +37,15 @@ function Login() {
             method:'post',
             url: 'https://vfms-server.onrender.com/signup',
             data: state
+        }).then(res =>{
+            if (res.status==201) {
+                alert("User Successfully Created!")
+            }
+        }).catch(err => {
+            if (err.response.status == 400) {
+                alert("User is already registered")
+            }
         })
-        if (response.status==201) {
-            alert("User Successfully Created!")
-        }
         setLoading(false)
     }
 
@@ -49,29 +54,33 @@ function Login() {
         e.preventDefault();
         setLoading(true)
         console.log(state);
-        setState({
-            username:'',
-            password:'',
-            email:''
-        })
         const response = await axios({
             method:'post',
             url: 'https://vfms-server.onrender.com/login',
             data: state
         })
-        setComment(response.data)
-        console.log(response);
+        .then(res => {
+            if(res.status == 200){
+                auth.login(state.email)
+                console.log(res.data);
+                navigate('/Middle', {replace:true})
+            }
+        }).catch(err => {
+            if (err.response.status==401) {
+                alert("The Username or Password is Incorrect");
+              }
+              else{
+                alert('There is an internal Server error. Kindly report to the IT team')
+              }
+        })
 
 
-        if(response.status == 200){
-            auth.login(state.email)
-            console.log(response.data);
-            navigate('/Middle', {replace:true})
-        }
-        else{
-            alert('Incorrect username or password')
-            console.log(comment);
-        }
+        
+        setState({
+            username:'',
+            password:'',
+            email:''
+        })
         
         setLoading(false)
         //console.log(comment);

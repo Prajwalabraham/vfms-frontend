@@ -129,24 +129,53 @@ html {
   }
 
   
-button{
+.scanButton{
 	width: 60%;
 	height: 40px;
 	margin: 10px auto;
 	justify-content: center;
 	display: block;
-	color: #fff;
-	background: #000000;
+	color: rgb(0, 0, 0);
+	background: #ffffff;
 	font-size: 1em;
 	font-weight: bold;
 	margin-top: 20px;
 	outline: none;
-	border: none;
-	border-radius: 5px;
+	border: 2px solid rgb(0, 0, 0);
+	border-radius: 20px;
 	transition: .2s ease-in;
 	cursor: pointer;
 }
-button:hover{
-	background: #03e9f4;
+.scanButton:hover{
+	background: #fbfbfb;
   color: #000000;
+}
+
+
+.Table{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border: 3px white;
+  border-radius: 10px;
+
+
+}
+
+ .Table-data {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.Table-row{
+  color: #ffffff;
+  border: 1px solid white;
+  text-align: center;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
 }

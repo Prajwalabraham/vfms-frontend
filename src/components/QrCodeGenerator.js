@@ -13,9 +13,9 @@ function QrCodeGenerator() {
     const [state, setState] = useState({
         name:'',
         phone:'',
-        email:'',
-        team:''
+        email:''
     });
+    const [team, setTeam] = useState('');
 
     
   const animatedComponents = makeAnimated();
@@ -31,26 +31,25 @@ function QrCodeGenerator() {
   ]
 
   const [loading, setLoading] = useState(false);
-  const [requiredName, setRequiredName] = useState(true);
-  const [requiredPhone, setRequiredPhone] = useState(true);
-  const [requiredEmail, setRequiredEmail] = useState(true);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [validName, setValidName] = useState(true);
+  const [validPhone, setValidPhone] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
 	const [qr, setQr] = useState('')
 
 	const GenerateQRCode = (e) => {
     e.preventDefault()
     if (state.name == '' && state.phone == '' && state.email == '') {
-      setRequiredName(false)
-      setRequiredPhone(false)
-      setRequiredEmail(false)
+      setValidName(false)
+      setValidPhone(false)
+      setValidEmail(false)
     }
     else if (state.name == '') {
-      setRequiredName(false)
+      setValidName(false)
     } else if (state.phone=='') {
-      setRequiredPhone(false)
+      setValidPhone(false)
     }
     else if (state.email == '') {
-      setRequiredEmail(false)
+      setValidEmail(false)
     }
     else{
 		QRCode.toDataURL(value, {
@@ -64,32 +63,35 @@ function QrCodeGenerator() {
 
 			console.log(value)
 			setQr(value)
-      console.log(state);
+      console.log(data);
 		})
     
-    setRequiredName(true)
-    setRequiredPhone(true)
-    setRequiredEmail(true)
+    setValidName(true)
+    setValidPhone(true)
+    setValidEmail(true)
   }
 	}
 
 
     function handleChange(event) {
-        const value = event.target.value;
+        const res = event.target.value;
         setState({
             ...state,
-            [event.target.name]: value
+            [event.target.name]: res
         })
-        setRequiredName(true)
-        setRequiredPhone(true)
-        setRequiredEmail(true)
+        setValidName(true)
+        setValidPhone(true)
+        setValidEmail(true)
     }
 
     const handleSelect = (e) => {
-      setState({team:e.value})
+      setTeam(e.value)
+      console.log(data);
     }
-
-    const value = JSON.stringify(state)
+    const data = {
+      state, team
+    }
+    const value = JSON.stringify(data)
     const handleSubmit = async(e) =>{
       e.preventDefault()
       /*if (state.name == '' && state.phone == '' && state.email == '' && state.team=='') {
@@ -108,7 +110,7 @@ function QrCodeGenerator() {
       const response = await axios({
         method:'post',
         url: "https://vfms-server.onrender.com/main_volunteers",
-        data: state
+        data: data
       })
       .then(res => {
         console.log(res);
@@ -129,9 +131,9 @@ function QrCodeGenerator() {
       setState({
         name:'',
         phone:'',
-        email:'',
-        team:''
+        email:''
       })
+      setTeam('')
       setLoading(false)
     }
 
@@ -142,19 +144,19 @@ function QrCodeGenerator() {
     <div className='login-box'>
         <form>
           <input name='name'  placeholder='Name' value={state.name} onChange={handleChange} />
-          {requiredName ? '' : 
+          {validName ? '' : 
            <Stack className='Stack'  spacing={2}>
            <Alert severity='warning' >Name is Required!!</Alert>
          </Stack>
           }      
             <input name='phone'  placeholder='Phone' value={state.phone} onChange={handleChange} />
-            {requiredPhone ? '' : 
+            {validPhone ? '' : 
            <Stack className='Stack'  spacing={2}>
               <Alert severity='warning' >Phone is Required!!</Alert>
             </Stack>
             }   
             <input name='email' placeholder='Email' value={state.email} onChange={handleChange} />
-            {requiredEmail ? '' : 
+            {validEmail ? '' : 
            <Stack className='Stack'  spacing={2}>
               <Alert severity='warning' >Email is Required!!</Alert>
             </Stack>
@@ -162,7 +164,7 @@ function QrCodeGenerator() {
               <br/>
             <Select
               className='SelectTeam'
-              closeMenuOnSelect={false}
+              closeMenuOnSelect={true}
               components={animatedComponents}
               isMulti={false}
               options={teams}
