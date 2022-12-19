@@ -66,9 +66,12 @@ function Login() {
                 navigate('/Middle', {replace:true})
             }
         }).catch(err => {
-            if (err.response.status==401) {
+            if (err.response.status==403) {
                 alert("The Username or Password is Incorrect");
               }
+            else if (err.response.status==401) {
+                alert("User doesn't Exist. Signup First")
+            }
               else{
                 alert('There is an internal Server error. Kindly report to the IT team')
               }
