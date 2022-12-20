@@ -13,6 +13,13 @@ const Scanner = (props) => {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [data, setData] = useState("");
+  const [res, setRes] = useState({
+    name: '',
+    taken: false,
+    preference: '',
+    team: ''
+  });
+  const [isverifying, setisverifying] = useState(false);
   useEffect(() => {
     document.title = 'QR Scanner';
   }, []);
@@ -28,11 +35,10 @@ const Scanner = (props) => {
       console.log(resData);
       setStartScan(false);
       setData(resData);
-      setLoadingScan(false);
-   
-      // setPrecScan(scanData);
-    }
+  setLoadingScan(false);
+      
   };
+}
 
   const View = (e) => {
     navigate('/View')
@@ -44,6 +50,8 @@ const Scanner = (props) => {
   
   const handleVerify = async(e) =>{
     console.log(data)
+    setisverifying(true)
+
     const response = await axios({
       method:'post',
       url: 'https://vfms-server.onrender.com/verify',
@@ -51,7 +59,20 @@ const Scanner = (props) => {
   }).then(res => {
     console.log(res);
     if (res.status == 201) {
-      alert("Successfully verified")
+      setRes({
+        name:res.data.resName,
+        taken:res.data.resTaken,
+        preference:res.data.resPreference,
+        team:res.data.resTeam,
+      })
+      navigate('/Success', {
+        state:{
+          name:res.data.resName,
+          taken:res.data.resTaken,
+          preference:res.data.resPreference,
+          team:res.data.resTeam,
+        }
+      })
     }
     else{
       alert("There is an internal Server error. Kindly report to the IT team")
@@ -60,12 +81,19 @@ const Scanner = (props) => {
     if (err.response.status == 400) {
       alert('Volunteer has not applied for coupons this week.')
     }
+    else if (err.response.status == 401) {
+      alert("The Volunteer has already taken food")
+    }
     else{
       alert('There is an internal Server error. Kindly report to the IT team')
 
     }
   })
+  setisverifying(false)
+    // setPrecScan(scanData);
   }
+  
+  
 
 
 
@@ -112,6 +140,8 @@ const Scanner = (props) => {
           
         </tbody>
       </table>}
+    {isverifying?
+    <CircularProgress /> : '' }
     {data !=="" && <button className='scanButton' type="" onClick={handleVerify} >Verify</button>}
     <button className='scanButton' onClick={View}>View</button>
   </div>

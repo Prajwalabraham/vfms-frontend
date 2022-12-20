@@ -16,7 +16,12 @@ function QrCodeGenerator() {
         email:''
     });
     const [team, setTeam] = useState('');
-
+    const [errors, setErrors] = useState({
+      name:'',
+      email:'',
+      password: '',
+      phone: ''
+    });
     
   const animatedComponents = makeAnimated();
 
@@ -45,10 +50,15 @@ function QrCodeGenerator() {
     }
     else if (state.name == '') {
       setValidName(false)
-    } else if (state.phone=='') {
+      setErrors({name:"Name is Required"})
+    }
+    else if (state.phone=='') {
       setValidPhone(false)
+      setErrors({phone:"Phone is Required"})
+
     }
     else if (state.email == '') {
+      setErrors({email:"Email is Required"})
       setValidEmail(false)
     }
     else{
@@ -94,18 +104,6 @@ function QrCodeGenerator() {
     const value = JSON.stringify(data)
     const handleSubmit = async(e) =>{
       e.preventDefault()
-      /*if (state.name == '' && state.phone == '' && state.email == '' && state.team=='') {
-        alert("All Inputs are Required!!!")
-      }
-      else if (state.name == '') {
-        alert("Name is Required!")
-      } else if (state.phone=='') {
-        alert("Phone is Required!")
-      }
-      else if (state.preference == '') {
-        alert("Phone is Required!")
-      }*/
-      //else{
       setLoading(true)
       const response = await axios({
         method:'post',
@@ -127,7 +125,6 @@ function QrCodeGenerator() {
           alert('There is an internal Server error. Kindly report to the IT team')
         }
       })
-   // }
       setState({
         name:'',
         phone:'',
@@ -143,7 +140,7 @@ function QrCodeGenerator() {
   return (
     <div className='login-box'>
         <form>
-          <input name='name'  placeholder='Name' value={state.name} onChange={handleChange} />
+          <input name='name'  placeholder='Full Name' value={state.name} onChange={handleChange} />
           {validName ? '' : 
            <Stack className='Stack'  spacing={2}>
            <Alert severity='warning' >Name is Required!!</Alert>
