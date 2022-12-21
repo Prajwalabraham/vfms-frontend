@@ -59,12 +59,7 @@ const Scanner = (props) => {
   }).then(res => {
     console.log(res);
     if (res.status == 201) {
-      setRes({
-        name:res.data.resName,
-        taken:res.data.resTaken,
-        preference:res.data.resPreference,
-        team:res.data.resTeam,
-      })
+     
       navigate('/Success', {
         state:{
           name:res.data.resName,
