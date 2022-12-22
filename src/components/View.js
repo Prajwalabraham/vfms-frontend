@@ -39,7 +39,7 @@ function View() {
     navigate('/Scan')
   }
   const moreDetails = (e) => {
-    navigate('/DetailedView')
+    navigate('/DV')
   }
 
 

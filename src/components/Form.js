@@ -95,13 +95,14 @@ class Form extends Component {
       }
     })
 
-    this.setState({
-      name: '',
-      preference: '',
-      phone: '',
-      loading: false
-    })
   }
+  
+  this.setState({
+    name: '',
+    preference: '',
+    phone: '',
+    loading: false
+  })
   }
     return (
         <div class="login-box">
@@ -110,11 +111,11 @@ class Form extends Component {
           <br />
           <form onSubmit={handleSubmit} >
             <div class="user-box">
-              <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} />
+              <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} required='true'/>
               <label>Your Name *</label>
             </div>
             <div class="user-box">
-              <input type="text" name="phone"  value={this.state.phone} onChange={this.handlePhoneChange} />
+              <input name="phone" type='tel' pattern="(7|8|9)\d{9}$"  value={this.state.phone} onChange={this.handlePhoneChange} required='true' />
               <label>Phone Number *</label>
             </div>
             <div class='wrapper'>
@@ -131,13 +132,7 @@ class Form extends Component {
             </div>
             <div> 
             {this.state.loading ?  <CircularProgress /> :            
-            <a href="#" onClick={handleSubmit}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Submit
-            </a>
+            <button type="submit">Submit</button>
   }
             </div>
           </form> 
