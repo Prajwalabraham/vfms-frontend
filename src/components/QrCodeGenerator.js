@@ -6,8 +6,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import './QrCodeGenerator.css'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
 
 function QrCodeGenerator() {
     const [state, setState] = useState({
@@ -16,13 +14,6 @@ function QrCodeGenerator() {
         email:''
     });
     const [team, setTeam] = useState('');
-    const [errors, setErrors] = useState({
-      name:'',
-      email:'',
-      password: '',
-      phone: ''
-    });
-    
   const animatedComponents = makeAnimated();
 
   const teams = [
@@ -36,32 +27,11 @@ function QrCodeGenerator() {
   ]
 
   const [loading, setLoading] = useState(false);
-  const [validName, setValidName] = useState(true);
-  const [validPhone, setValidPhone] = useState(true);
-  const [validEmail, setValidEmail] = useState(true);
 	const [qr, setQr] = useState('')
 
 	const GenerateQRCode = (e) => {
     e.preventDefault()
-    if (state.name == '' && state.phone == '' && state.email == '') {
-      setValidName(false)
-      setValidPhone(false)
-      setValidEmail(false)
-    }
-    else if (state.name == '') {
-      setValidName(false)
-      setErrors({name:"Name is Required"})
-    }
-    else if (state.phone=='') {
-      setValidPhone(false)
-      setErrors({phone:"Phone is Required"})
 
-    }
-    else if (state.email == '') {
-      setErrors({email:"Email is Required"})
-      setValidEmail(false)
-    }
-    else{
 		QRCode.toDataURL(value, {
 			margin: 2,
 			color: {
@@ -76,10 +46,6 @@ function QrCodeGenerator() {
       console.log(data);
 		})
     
-    setValidName(true)
-    setValidPhone(true)
-    setValidEmail(true)
-  }
 	}
 
 
@@ -89,9 +55,6 @@ function QrCodeGenerator() {
             ...state,
             [event.target.name]: res
         })
-        setValidName(true)
-        setValidPhone(true)
-        setValidEmail(true)
     }
 
     const handleSelect = (e) => {
@@ -134,30 +97,26 @@ function QrCodeGenerator() {
       setLoading(false)
     }
 
+    const email = document.getElementById("mail");
+if(email){
+email.addEventListener("input", (event) => {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity("Email should be in format: example@example.com");
+    email.reportValidity();
+  } else {
+    email.setCustomValidity("");
+  }
+});
+}
     
       // download QR code
     
   return (
     <div className='login-box'>
-        <form>
-          <input name='name'  placeholder='Full Name' value={state.name} onChange={handleChange} />
-          {validName ? '' : 
-           <Stack className='Stack'  spacing={2}>
-           <Alert severity='warning' >Name is Required!!</Alert>
-         </Stack>
-          }      
-            <input name='phone'  placeholder='Phone' value={state.phone} onChange={handleChange} />
-            {validPhone ? '' : 
-           <Stack className='Stack'  spacing={2}>
-              <Alert severity='warning' >Phone is Required!!</Alert>
-            </Stack>
-            }   
-            <input name='email' placeholder='Email' value={state.email} onChange={handleChange} />
-            {validEmail ? '' : 
-           <Stack className='Stack'  spacing={2}>
-              <Alert severity='warning' >Email is Required!!</Alert>
-            </Stack>
-              }   
+        <form onSubmit={GenerateQRCode}>
+          <input name='name'  placeholder='Full Name' value={state.name} onChange={handleChange} required />
+            <input name='phone'  placeholder='Phone' type='tel' pattern="(7|8|9)\d{9}$" value={state.phone} onChange={handleChange} required='true'/>
+            <input name='email' id='mail' placeholder='Email' type='email'  value={state.email} onChange={handleChange} required />
               <br/>
             <Select
               className='SelectTeam'
@@ -168,7 +127,7 @@ function QrCodeGenerator() {
               name='team'
               onChange={handleSelect}
             />
-      			<button onClick={GenerateQRCode}>Generate</button>
+      			<button type='submit' >Generate</button>
         </form>       
         {qr && <>
 				<img src={qr} alt='' />
