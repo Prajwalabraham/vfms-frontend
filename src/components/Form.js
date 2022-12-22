@@ -115,7 +115,7 @@ class Form extends Component {
               <label>Your Name *</label>
             </div>
             <div class="user-box">
-              <input name="phone" type='tel' pattern="(7|8|9)\d{9}$"  value={this.state.phone} onChange={this.handlePhoneChange} required='true' />
+              <input name="phone" type='tel' pattern="(6|7|8|9)\d{9}$"  value={this.state.phone} onChange={this.handlePhoneChange} required='true' />
               <label>Phone Number *</label>
             </div>
             <div class='wrapper'>

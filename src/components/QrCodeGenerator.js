@@ -115,7 +115,7 @@ email.addEventListener("input", (event) => {
     <div className='login-box'>
         <form onSubmit={GenerateQRCode}>
           <input name='name'  placeholder='Full Name' value={state.name} onChange={handleChange} required />
-            <input name='phone'  placeholder='Phone' type='tel' pattern="(7|8|9)\d{9}$" value={state.phone} onChange={handleChange} required='true'/>
+            <input name='phone'  placeholder='Phone' type='tel' pattern="(6|7|8|9)\d{9}$" value={state.phone} onChange={handleChange} required='true'/>
             <input name='email' id='mail' placeholder='Email' type='email'  value={state.email} onChange={handleChange} required />
               <br/>
             <Select
