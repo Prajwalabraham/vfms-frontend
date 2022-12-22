@@ -47,8 +47,21 @@ function DetailedView() {
                 nvCount: 0,
                 Taken: 0,
                 vCount: 0,
-              }
+              },
               
+              Media:{
+                
+                nvCount: 0,
+                Taken: 0,
+                vCount: 0,
+              },
+              KidsChurch:{
+                
+                nvCount: 0,
+                Taken: 0,
+                vCount: 0,
+              },
+
           };
           arr.map((el, i) => {
             if (el.team.includes('Greeters')) {
@@ -87,6 +100,28 @@ function DetailedView() {
             }
             }
             
+            else if (el.team.includes('Media')) {
+              if (el.preference.includes('NON-VEG')) {
+                filtered.Media.nvCount++;
+            }
+            else if (el.preference.includes('VEG')) {
+              filtered.Media.vCount++;
+            }
+            if (el.taken===true ) {
+              filtered.Media.Taken++;
+            }
+            }
+            else if (el.team.includes('Kids Church')) {
+              if (el.preference.includes('NON-VEG')) {
+                filtered.KidsChurch.nvCount++;
+            }
+            else if (el.preference.includes('VEG')) {
+              filtered.KidsChurch.vCount++;
+            }
+            if (el.taken===true ) {
+              filtered.KidsChurch.Taken++;
+            }
+            }
         });
         console.log(filtered);
         setData(filtered)
@@ -101,45 +136,63 @@ function DetailedView() {
       }
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Team</th>
-            <th>NON-VEG</th>
-            <th>VEG</th>
-            <th>Ordered</th>
-            <th>Recieved</th>
-            <th>Remaining</th>
+    <div className='box'>
+      <br />
+      <h2>Team Details</h2>
+      <table className='dvTable'>
+        <thead className='DVthead'>
+          <tr className='DVtr'>
+            <th className='DVth'>Team</th>
+            <th className='DVth'>NON-VEG</th>
+            <th className='DVth'>VEG</th>
+            <th className='DVth'>Ordered</th>
+            <th className='DVth'>Recieved</th>
+            <th className='DVth'>Remaining</th>
           </tr>
         </thead>
           
         {data&&
         
-        <tbody>
-          <tr>
-            <td>Greeters</td>
-            <td>{data.Greeters.nvCount}</td>
-            <td>{data.Greeters.vCount}</td>
-            <td>{data.Greeters.nvCount + data.Greeters.vCount}</td>
-            <td>{data.Greeters.Taken}</td>
-            <td>{data.Greeters.nvCount + data.Greeters.vCount - data.Greeters.Taken}</td>
+        <tbody className='DVtbody'>
+          <tr className='DVtr'>
+            <td className='DVtd'>Greeters</td>
+            <td className='DVtd'>{data.Greeters.nvCount}</td>
+            <td className='DVtd'>{data.Greeters.vCount}</td>
+            <td className='DVtd'>{data.Greeters.nvCount + data.Greeters.vCount}</td>
+            <td className='DVtd'>{data.Greeters.Taken}</td>
+            <td className='DVtd'>{data.Greeters.nvCount + data.Greeters.vCount - data.Greeters.Taken}</td>
           </tr>
-          <tr>
-          <td>Cleaning</td>
-          <td>{data.Cleaning.nvCount}</td>
-          <td>{data.Cleaning.vCount}</td>
-          <td>{data.Cleaning.nvCount + data.Cleaning.vCount}</td>
-          <td>{data.Cleaning.Taken}</td>
-          <td>{data.Cleaning.nvCount + data.Cleaning.vCount - data.Cleaning.Taken}</td>
+          <tr className='DVtr'>
+          <td className='DVtd'>Cleaning</td>
+          <td className='DVtd'>{data.Cleaning.nvCount}</td>
+          <td className='DVtd'>{data.Cleaning.vCount}</td>
+          <td className='DVtd'>{data.Cleaning.nvCount + data.Cleaning.vCount}</td>
+          <td className='DVtd'>{data.Cleaning.Taken}</td>
+          <td className='DVtd'>{data.Cleaning.nvCount + data.Cleaning.vCount - data.Cleaning.Taken}</td>
         </tr>
-          <tr>
-          <td>Greeters</td>
-          <td>{data.Intercession.nvCount}</td>
-          <td>{data.Intercession.vCount}</td>
-          <td>{data.Intercession.nvCount + data.Intercession.vCount}</td>
-          <td>{data.Intercession.Taken}</td>
-          <td>{data.Intercession.nvCount + data.Intercession.vCount - data.Intercession.Taken}</td>
+          <tr className='DVtr'>
+          <td className='DVtd'>Intercession</td>
+          <td className='DVtd'>{data.Intercession.nvCount}</td>
+          <td className='DVtd'>{data.Intercession.vCount}</td>
+          <td className='DVtd'>{data.Intercession.nvCount + data.Intercession.vCount}</td>
+          <td className='DVtd'>{data.Intercession.Taken}</td>
+          <td className='DVtd'>{data.Intercession.nvCount + data.Intercession.vCount - data.Intercession.Taken}</td>
+        </tr>
+        <tr className='DVtr'>
+          <td className='DVtd'>Media</td>
+          <td className='DVtd'>{data.Media.nvCount}</td>
+          <td className='DVtd'>{data.Media.vCount}</td>
+          <td className='DVtd'>{data.Media.nvCount + data.Media.vCount}</td>
+          <td className='DVtd'>{data.Media.Taken}</td>
+          <td className='DVtd'>{data.Media.nvCount + data.Media.vCount - data.Media.Taken}</td>
+        </tr>
+        <tr className='DVtr'>
+          <td className='DVtd'>Kids Church</td>
+          <td className='DVtd'>{data.KidsChurch.nvCount}</td>
+          <td className='DVtd'>{data.KidsChurch.vCount}</td>
+          <td className='DVtd'>{data.KidsChurch.nvCount + data.KidsChurch.vCount}</td>
+          <td className='DVtd'>{data.KidsChurch.Taken}</td>
+          <td className='DVtd'>{data.KidsChurch.nvCount + data.KidsChurch.vCount - data.KidsChurch.Taken}</td>
         </tr>
         </tbody>
 }

@@ -45,25 +45,25 @@ function View() {
 
   return (
     <div className='login-box'>
-      <table>
-        <thead>
-          <tr>
-            <th>
+      <table className='viewTable'>
+        <thead className='viewThead'>
+          <tr className='viewTr'>
+            <th className='viewTh'>
               Total
             </th>
-            <th>Ordered</th>
-            <th>Recieved</th>
+            <th className='viewTh'>Ordered</th>
+            <th className='viewTh'>Recieved</th>
           </tr>
         </thead>
-        <tbody>
-          <tr><p>Non-Veg</p>
-          <td>{data.nonVegCount}</td>
-          <td>{data.recNonVeg}</td>
+        <tbody className='viewTbody'>
+          <tr className='viewTr'><p>Non-Veg</p>
+          <td className='viewTd'>{data.nonVegCount}</td>
+          <td className='viewTd'>{data.recNonVeg}</td>
           </tr>
           
-          <tr><p>Veg</p>
-          <td>{data.vegCount}</td>
-          <td>{data.recVeg}</td>
+          <tr className='viewTr'><p>Veg</p>
+          <td className='viewTd'>{data.vegCount}</td>
+          <td className='viewTd'>{data.recVeg}</td>
           </tr>
           
         </tbody>
