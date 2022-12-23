@@ -1,19 +1,52 @@
+ 
+  .Llogin-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 390px;
+    padding: 70px;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .Llogin-box{
+      top: 50%;
+      left: 49.5%;
+      width: 90%;
+      padding: 15px;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,.5);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 10px;
+  }
+  }
+ 
+ 
  .viewTable{
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
     border: 3px white;
     border-radius: 3px;
+    table-layout: fixed;
   }
   
    .viewTd,  .viewTh {
     border: 1px solid #ddd;
     padding: 8px;
+    
   }
   .viewTr{
     color: #ffffff;
     border: 1px solid white;
     text-align: center;
+    word-wrap: break-word;
+    overflow-y:hidden;
   }
   
   .viewTh {

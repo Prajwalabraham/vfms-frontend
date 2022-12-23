@@ -44,26 +44,32 @@ function View() {
 
 
   return (
-    <div className='login-box'>
+    <div className='Llogin-box'>
       <table className='viewTable'>
         <thead className='viewThead'>
           <tr className='viewTr'>
             <th className='viewTh'>
-              Total
+              Food
             </th>
             <th className='viewTh'>Ordered</th>
             <th className='viewTh'>Recieved</th>
+            <th className='viewTh'>Remaining</th>
+            <th className='viewTh'>Total</th>
           </tr>
         </thead>
         <tbody className='viewTbody'>
           <tr className='viewTr'><p>Non-Veg</p>
           <td className='viewTd'>{data.nonVegCount}</td>
           <td className='viewTd'>{data.recNonVeg}</td>
+          <td className='viewTd'>{parseFloat(data.nonVegCount) - parseFloat(data.recNonVeg)}</td>
+          <td className='viewTd'>{parseFloat(data.recNonVeg) + parseFloat(data.nonVegCount)}</td>
           </tr>
           
           <tr className='viewTr'><p>Veg</p>
           <td className='viewTd'>{data.vegCount}</td>
           <td className='viewTd'>{data.recVeg}</td>
+          <td className='viewTd'>{parseFloat(data.vegCount) - parseFloat(data.recVeg)}</td>
+          <td className='viewTd'>{parseFloat(data.recVeg) + parseFloat(data.vegCount)}</td>
           </tr>
           
         </tbody>
