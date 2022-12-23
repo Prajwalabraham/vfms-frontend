@@ -123,14 +123,14 @@ const Scanner = (props) => {
 
     {data == ""? '':''
         }
-    {data !== "" && <table className='Table'>
-        <tbody className='Table-body' >
-          <tr className='Table-row'><p>Name</p>
-          <td className='Table-data' >{data.state.name}</td>
+    {data !== "" && <table className='tTable'>
+        <tbody className='Ttbody' >
+          <tr className='Ttr'><p>Name</p>
+          <td className='Ttd' >{data.state.name}</td>
           </tr>
           
-          <tr><p>Team</p>
-          <td className='Table-data'>{data.team}</td>
+          <tr className='Ttr'><p>Team</p>
+          <td className='Ttd'>{data.team}</td>
           </tr>
           
         </tbody>

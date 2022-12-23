@@ -13,19 +13,19 @@ function Success() {
   
   return (
     <div className='login-box'>
-        <ThumbUpAltRoundedIcon sx={{ fontSize: 260 }} color="primary"  />
+        <ThumbUpAltRoundedIcon sx={{ fontSize: 210 }} color="primary"  />
         <h2>Successfully Verified</h2>
     <br/>
-        <table className='Table'>
-        <tbody className='Table-body' >
-          <tr className='Table-row'><p>Name</p>
-          <td className='Table-data' >{location.state.name}</td>
+        <table className='tTable'>
+        <tbody className='Ttbody' >
+          <tr className='Ttr'><p>Name</p>
+          <td className='Ttd' >{location.state.name}</td>
           </tr>
-          <tr><p>Team</p>
-          <td className='Table-data'>{location.state.team}</td>
+          <tr className='Ttr' ><p>Team</p>
+          <td className='Ttd'>{location.state.team}</td>
           </tr>
-          <tr><p>Preference</p>
-          <td className='Table-data'>{location.state.preference}</td>
+          <tr className='Ttr'><p>Preference</p>
+          <td className='Ttd'>{location.state.preference}</td>
           </tr>
         </tbody>
       </table>

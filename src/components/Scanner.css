@@ -152,7 +152,7 @@ html {
 }
 
 
-.Table{
+.tTable{
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
@@ -162,17 +162,17 @@ html {
 
 }
 
- .Table-data {
+ .Ttd {
   border: 1px solid #ddd;
   padding: 8px;
 }
-.Table-row{
+.Ttr{
   color: #ffffff;
   border: 1px solid white;
   text-align: center;
 }
 
-th {
+.T-th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
