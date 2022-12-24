@@ -51,27 +51,25 @@ function View() {
             <th className='viewTh'>
               Food
             </th>
-            <th className='viewTh'>Ordered</th>
-            <th className='viewTh'>Recieved</th>
-            <th className='viewTh'>Remaining</th>
-            <th className='viewTh'>Total</th>
+            <th className='viewTh'><img src="https://img.icons8.com/fluency/48/000000/non-vegetarian-food-symbol.png" alt='NON-VEG' /></th>
+            <th className='viewTh'><img src="https://img.icons8.com/color/48/000000/vegetarian-food-symbol.png" alt='VEG' /></th>
           </tr>
         </thead>
         <tbody className='viewTbody'>
-          <tr className='viewTr'><p>Non-Veg</p>
+          <tr className='viewTr'><p>Ordered</p>
           <td className='viewTd'>{data.nonVegCount}</td>
           <td className='viewTd'>{data.recNonVeg}</td>
-          <td className='viewTd'>{parseFloat(data.nonVegCount) - parseFloat(data.recNonVeg)}</td>
-          <td className='viewTd'>{parseFloat(data.recNonVeg) + parseFloat(data.nonVegCount)}</td>
           </tr>
           
-          <tr className='viewTr'><p>Veg</p>
+          <tr className='viewTr'><p>Recieved</p>
           <td className='viewTd'>{data.vegCount}</td>
           <td className='viewTd'>{data.recVeg}</td>
-          <td className='viewTd'>{parseFloat(data.vegCount) - parseFloat(data.recVeg)}</td>
-          <td className='viewTd'>{parseFloat(data.recVeg) + parseFloat(data.vegCount)}</td>
           </tr>
           
+          <tr className='viewTr'><p>Remaining</p>
+          <td className='viewTd'>{parseFloat(data.nonVegCount) - parseFloat(data.recNonVeg)}</td>
+          <td className='viewTd'>{parseFloat(data.vegCount) - parseFloat(data.recVeg)}</td>
+          </tr>
         </tbody>
       </table>
       <br />
