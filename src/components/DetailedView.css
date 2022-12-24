@@ -11,68 +11,7 @@
     color: #fff;
     text-align: center;
   }
-  
-@media 
-  only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px){
-    .dvTable{
-                
-        width: 100%; 
-        border-collapse: collapse; 
-
-    }
-    h2 {
-        margin: 0 0 30px;
-        padding: 0;
-        color: #fff;
-        text-align: center;
-      }
-    .DVtable, .DVthead, .DVtbody, .DVth, .DVtd, .DVtr { 
-		display: block; 
-        margin: 20px;
-
-        
-	}
-    .DVthead .DVtr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-        
-	}
-	
-	.DVtr { 
-        border: 1px solid rgb(255, 255, 255);
-
-    }
-	
-	.DVtd { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-        background: rgb(0, 0, 0);
-        opacity: 0.8;
-        
-	}
-	
-	.DVtd:before { 
-		/* Now like a table header */
-		position: relative;
-		/* Top/left values mimic padding */
-		top: 0px;
-		left:0px;
-		width: 100%; 
-		padding-right: 100px; 
-		white-space: nowrap;
-	}
-    .DVtd:nth-of-type(1):before { content: "Team"; }
-	.DVtd:nth-of-type(2):before { content: "NON-VEG"; }
-	.DVtd:nth-of-type(3):before { content: "VEG"; }
-	.DVtd:nth-of-type(4):before { content: "Ordered"; }
-	.DVtd:nth-of-type(5):before { content: "Recieved"; }
-	.DVtd:nth-of-type(6):before { content: "Remaining"; }
-}
+ 
    .DVtd,  .DVth {
     border: 1px solid #ddd;
     padding: 20px;

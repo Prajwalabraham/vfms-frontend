@@ -6,10 +6,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-function DetailedView() {
-    
-  const [data, setData] = useState();
+
+function ExpDV() {
+    const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
+    const [res, setRes] = useState([]);
     const [team, setTeam] = useState('');
   
     const navigate = useNavigate();
@@ -29,6 +30,7 @@ function DetailedView() {
 
     const handleSelect = (e) => {
         setTeam(e.value)
+        console.log(data);
       }
   
   
@@ -41,6 +43,7 @@ function DetailedView() {
                 "Content-type": "application/json"
               },
           }).then(response => {
+            console.log(response);
             const result = response.data.rows;
             var arr = [];
             Object.keys(result).forEach(function(key) {
@@ -68,7 +71,9 @@ function DetailedView() {
                   }
                 }
               });
+              console.log(filtered);
               setData(filtered);
+          console.log(data);
           })
           setLoading(false)
       }
@@ -132,4 +137,4 @@ function DetailedView() {
   )
 }
 
-export default DetailedView
+export default ExpDV
