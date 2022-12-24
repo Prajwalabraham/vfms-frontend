@@ -122,10 +122,10 @@ class Form extends Component {
               <input type="radio" name="select" id="option-1" value='NON-VEG' checked={this.state.preference === 'NON-VEG'} onChange={this.onValueChange} />
                 <input type="radio" name="select" id="option-2" value='VEG' checked={this.state.preference === 'VEG'} onChange={this.onValueChange} />
                   <label for="option-1" className="option option-1">
-                      <span><img src="https://user-images.githubusercontent.com/74299799/209422521-17774936-4c7c-48b9-96ba-9bd2ce13ff14.png" alt='NON-VEG' /></span>
+                      <span><img src="https://user-images.githubusercontent.com/74299799/209433785-40cc2619-acc3-41b2-adc6-c6cc09144c38.png" alt='NON-VEG' /></span>
                       </label>
                   <label for="option-2" className="option option-2">
-                      <span><img src="https://user-images.githubusercontent.com/74299799/209422477-dad0110a-b0bb-45b1-a88c-e3ffcd9a3f60.png" alt='' /></span>
+                      <span><img src="https://user-images.githubusercontent.com/74299799/209433786-f261fed6-427b-409a-96b5-6cf58deadef9.png" alt='' /></span>
                   </label>
             </div>
             <div> 

@@ -10,6 +10,7 @@ import View from "./components/View";
 import QrCodeGenerator from './components/QrCodeGenerator';
 import Success from './components/Success'
 import DetailedView from './components/DetailedView'
+import Individual from './components/Individual'
 
 function App() {
   useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
         <Route path='/Scan' element={<Protected><Scanner /></Protected>}  />
         <Route path='/QR' element={<QrCodeGenerator />}  />
         <Route path='/Success' element={<Success />}  />
+        <Route path='/Individual' element={<Individual />}  />
         <Route path='/DV' element = {<Protected><DetailedView /></Protected>} />
 
 

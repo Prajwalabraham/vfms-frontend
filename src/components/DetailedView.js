@@ -96,8 +96,8 @@ function DetailedView() {
       <thead className='DVthead'>
         <tr className='DVtr'>
         <th className='DVth'>Food</th>
-          <th className='DVth'><img src="https://img.icons8.com/fluency/48/000000/non-vegetarian-food-symbol.png" alt='NON-VEG' /></th>
-          <th className='DVth'><img src="https://img.icons8.com/color/48/000000/vegetarian-food-symbol.png" alt='VEG' /></th>
+          <th className='DVth'><img src="https://user-images.githubusercontent.com/74299799/209433785-40cc2619-acc3-41b2-adc6-c6cc09144c38.png" alt='NON-VEG' /></th>
+          <th className='DVth'><img src="https://user-images.githubusercontent.com/74299799/209433786-f261fed6-427b-409a-96b5-6cf58deadef9.png" alt='VEG' /></th>
           <th className='DVth'>Total</th>
         </tr>
       </thead>

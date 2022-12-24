@@ -43,12 +43,15 @@ function Individual() {
               "Content-type": "application/json"
             },
         }).then(response => {
+            console.log(response);
           const result = response.data.rows;
+          console.log(result);
           var arr = [];
           Object.keys(result).forEach(function(key) {
             arr.push(result[key]);
           });
           setData(result)
+          console.log(data.team);
         })
         setLoading(false)
     }
@@ -82,16 +85,22 @@ return (
         </tr>
       </thead>
        <tbody>
-       {data.team == team && (
-    <>
+        {data.map(el =>{  
+        <>
+       {el.team == team && (
+    
       <tr className='DVtr'>
-        <td className='DVtd'> {data.name} </td>
-        <td className='DVtd'> {data.team} </td>
-        <td className='DVtd'> {data.preference} </td>
-        <td className='DVtd'> {data.taken} </td>
+        <td className='DVtd'> {el.name} </td>
+        <td className='DVtd'> {el.team} </td>
+        <td className='DVtd'> {el.preference} </td>
+        <td className='DVtd'> {el.taken} </td>
       </tr>
-    </>
+   
   )}
+  </>
+         
+    })
+}
 </tbody>
       
     </table>        

@@ -178,8 +178,8 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-radius: 5px;
-    padding: 20px 25px;
+    border-radius: 0px;
+    padding: 10px 35px;
     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
   }
   .wrapper .option{
@@ -192,6 +192,9 @@ html {
     cursor: pointer;
     padding:  10px;
     transition: all 0.5s ease;
+  }
+  .wrapper .option span img{
+    border-radius: 0px;
   }
   input[type="radio"]{
     display: none;
