@@ -82,11 +82,14 @@ function DetailedView() {
           navigate('/Scan')
         }
            
+        const Individual = (e) => {
+          navigate('/Individual')
+        }
 
   return (
     <div className='Llogin-box'>
     <br />
-    <h2>Team Details</h2>
+    <h2>More Details</h2>
     {fetched ? 
     <Select
               className='SelectTeam'
@@ -97,8 +100,12 @@ function DetailedView() {
               name='team'
               onChange={handleSelect}
             />
-           : '' }
-            <br />
+           : 
+           <> {loading ? <CircularProgress /> : 
+           <button type="" onClick={viewData}>Refresh</button>
+       }
+       </> 
+       }
             {team && (
                  
     <table className='dvTable'>
@@ -134,9 +141,7 @@ function DetailedView() {
       
     </table>
       )}
-    {loading ? <CircularProgress /> : 
-    <button type="" onClick={viewData}>Refresh</button>
-}
+    <button type="" onClick={Individual} >Individual</button>
     <button type="" onClick={Back}>Scan</button>
   </div>
   )

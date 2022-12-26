@@ -43,18 +43,18 @@ function Individual() {
               "Content-type": "application/json"
             },
         }).then(response => {
-            console.log(response);
           const result = response.data.rows;
           console.log(result);
           setData(result)
           console.log(data);
+
           console.log(data?.map(el => el.team));
         })
         setLoading(false)
     }
     
       const Back = (e) => {
-        navigate('/Scan')
+        navigate('/View')
       }
          
 
@@ -81,25 +81,33 @@ return (
           <th className='DVth'>Taken</th>
         </tr>
       </thead>
-       <tbody>
-        {data?.map(el =>{ 
-        <tr className='DVtr' key={el}>
-        <td className='DVtd'> {el.name} </td>
-        <td className='DVtd'> {el.team} </td>
-        <td className='DVtd'> {el.preference} </td>
-        <td className='DVtd'> {el.taken} </td>
-      </tr>
-    })
-}
-</tbody>
       
-    </table>        
+      {data?.map((el => {
+          <>
+          {el.team==team?
+       <tbody>
+        <tr className='DVtr' >
+        <td className='DVtd'> {data.name} </td>
+        <td className='DVtd'> {data.team} </td>
+        <td className='DVtd'> {data.preference} </td>
+        <td className='DVtd'> {data.taken} </td>
+      </tr>
+
+</tbody>
+
+:''   }
+</>
+
+}))      
+} 
+      
+    </table> 
 
 
   {loading ? <CircularProgress /> : 
   <button type="" onClick={viewData}>Refresh</button>
 }
-  <button type="" onClick={Back}>Scan</button>
+  <button type="" onClick={Back}>Back</button>
 </div>
 )
 }
