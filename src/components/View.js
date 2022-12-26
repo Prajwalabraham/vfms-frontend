@@ -51,6 +51,9 @@ function View() {
                     filtered.vTaken += 1;
                   }
                 }
+                else{
+                  throw console.error('something is not right');
+                }
               });
               setData(filtered);
     })
@@ -91,17 +94,17 @@ function View() {
         <tbody className='viewTbody'>
           <tr className='viewTr'><p>Ordered</p>
           <td className='viewTd'>{data.nvCount}</td>
-          <td className='viewTd'>{data.nvTaken}</td>
+          <td className='viewTd'>{data.vCount}</td>
           </tr>
           
           <tr className='viewTr'><p>Recieved</p>
-          <td className='viewTd'>{data.vCount}</td>
+          <td className='viewTd'>{data.nvTaken}</td>
           <td className='viewTd'>{data.vTaken}</td>
           </tr>
           
           <tr className='viewTr'><p>Remaining</p>
-          <td className='viewTd'>{parseFloat(data.nvCount) - parseFloat(data.nvTaken)}</td>
-          <td className='viewTd'>{parseFloat(data.vCount) - parseFloat(data.vTaken)}</td>
+          <td className='viewTd'>{data.nvCount - data.nvTaken}</td>
+          <td className='viewTd'>{data.vCount - data.vTaken}</td>
           </tr>
         </tbody>
       </table>
