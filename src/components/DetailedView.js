@@ -95,6 +95,8 @@ function DetailedView() {
             />
            : '' }
             <br />
+            {team && (
+                 
     <table className='dvTable'>
       <thead className='DVthead'>
         <tr className='DVtr'>
@@ -105,8 +107,7 @@ function DetailedView() {
         </tr>
       </thead>
        <tbody>
-       {team && (
-    <>
+    
       <tr className='DVtr'><p>Ordered</p>
         <td className='DVtd'> {data[team].nvCount} </td>
         <td className='DVtd'> {data[team].vCount} </td>
@@ -122,11 +123,10 @@ function DetailedView() {
         <td className='DVtd'> {data[team].vCount - data[team].vTaken} </td>
         <td className='DVtd'> {data[team].nvCount - data[team].nvTaken + data[team].vCount - data[team].vTaken} </td>
       </tr>
-    </>
-  )}
 </tbody>
       
     </table>
+      )}
     {loading ? <CircularProgress /> : 
     <button type="" onClick={viewData}>Refresh</button>
 }

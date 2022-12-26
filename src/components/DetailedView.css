@@ -1,7 +1,7 @@
 .dvTable{
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
     border: 3px white;
     border-radius: 3px;
   }
@@ -28,4 +28,8 @@
     text-align: left;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
+  }
+
+  .DVth img {
+    border-radius: 0px;
   }
