@@ -11,6 +11,7 @@ function DetailedView() {
   const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
     const [team, setTeam] = useState('');
+    const [fetched, setFetched] = useState(false);
   
     const navigate = useNavigate();
 
@@ -22,8 +23,6 @@ function DetailedView() {
       {value:'Media', label:'Media'},
       {value:'Intercession', label:'Intercession'},
       {value:'Kids Church', label:'Kids Church'}
-  
-    
     ]
   
 
@@ -71,6 +70,8 @@ function DetailedView() {
               setData(filtered);
           })
           setLoading(false)
+          setFetched(true)
+          
       }
       
         const Back = (e) => {
@@ -82,6 +83,7 @@ function DetailedView() {
     <div className='Llogin-box'>
     <br />
     <h2>Team Details</h2>
+    {fetched ? 
     <Select
               className='SelectTeam'
               closeMenuOnSelect={true}
@@ -91,6 +93,7 @@ function DetailedView() {
               name='team'
               onChange={handleSelect}
             />
+           : '' }
             <br />
     <table className='dvTable'>
       <thead className='DVthead'>

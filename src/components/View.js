@@ -12,14 +12,47 @@ function View() {
 
   const navigate = useNavigate();
 
+  
+  const teams = [
+    {value:'Greeters', label:'Greeters'},
+    {value:'Cleaning', label:'Cleaning'},
+    {value:'Media', label:'Media'},
+    {value:'Intercession', label:'Intercession'},
+    {value:'Kids Church', label:'Kids Church'}
+
+  
+  ]
+
   const viewData = async(e) =>{
     setLoading(true)
     const result = await axios({
       method:'post',
       url: 'https://vfms-server.onrender.com/viewKitchen',
     }).then(response => {
-      setData(response.data);
-      console.log(data);  
+      const result = response.data.rows;
+            let filtered = {};
+              
+                filtered = {
+                    nvCount: 0,
+                    nvTaken: 0,
+                    vCount: 0,
+                    vTaken: 0,
+                };
+        
+              result.map(user => {
+                if (user.preference.includes("NON-VEG")) {
+                  filtered.nvCount += 1; 
+                  if (user.taken === true) {
+                    filtered.nvTaken += 1;
+                  }
+                } else if (user.preference.includes('VEG')) {
+                  filtered.vCount += 1;
+                  if (user.taken === true) {
+                    filtered.vTaken += 1;
+                  }
+                }
+              });
+              setData(filtered);
     })
     .catch(error => {
       console.log(error);
@@ -57,18 +90,18 @@ function View() {
         </thead>
         <tbody className='viewTbody'>
           <tr className='viewTr'><p>Ordered</p>
-          <td className='viewTd'>{data.nonVegCount}</td>
-          <td className='viewTd'>{data.recNonVeg}</td>
+          <td className='viewTd'>{data.nvCount}</td>
+          <td className='viewTd'>{data.nvTaken}</td>
           </tr>
           
           <tr className='viewTr'><p>Recieved</p>
-          <td className='viewTd'>{data.vegCount}</td>
-          <td className='viewTd'>{data.recVeg}</td>
+          <td className='viewTd'>{data.vCount}</td>
+          <td className='viewTd'>{data.vTaken}</td>
           </tr>
           
           <tr className='viewTr'><p>Remaining</p>
-          <td className='viewTd'>{parseFloat(data.nonVegCount) - parseFloat(data.recNonVeg)}</td>
-          <td className='viewTd'>{parseFloat(data.vegCount) - parseFloat(data.recVeg)}</td>
+          <td className='viewTd'>{parseFloat(data.nvCount) - parseFloat(data.nvTaken)}</td>
+          <td className='viewTd'>{parseFloat(data.vCount) - parseFloat(data.vTaken)}</td>
           </tr>
         </tbody>
       </table>

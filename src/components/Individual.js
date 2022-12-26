@@ -51,7 +51,7 @@ function Individual() {
             arr.push(result[key]);
           });
           setData(result)
-          console.log(data.team);
+          console.log(data?.map(el => el.team));
         })
         setLoading(false)
     }
@@ -85,19 +85,19 @@ return (
         </tr>
       </thead>
        <tbody>
-        {data.map(el =>{  
-        <>
-       {el.team == team && (
-    
-      <tr className='DVtr'>
+        {data?.map(el =>{ 
+          if (el.team == team) {
+            <>
+        {el.team &&
+        <tr className='DVtr'>
         <td className='DVtd'> {el.name} </td>
         <td className='DVtd'> {el.team} </td>
         <td className='DVtd'> {el.preference} </td>
         <td className='DVtd'> {el.taken} </td>
       </tr>
-   
-  )}
-  </>
+          }
+      </>
+          }
          
     })
 }
