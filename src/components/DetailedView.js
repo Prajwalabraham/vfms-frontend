@@ -41,10 +41,7 @@ function DetailedView() {
               },
           }).then(response => {
             const result = response.data.rows;
-            var arr = [];
-            Object.keys(result).forEach(function(key) {
-              arr.push(result[key]);
-            });
+            console.log(result);
             let filtered = {};
               teams.map(team=>{
                 filtered[team.value] = {
@@ -54,6 +51,7 @@ function DetailedView() {
                     vTaken: 0,
                 };
               });
+              
               result.map(user => {
                 if (user.preference.includes("NON-VEG")) {
                   filtered[user.team].nvCount += 1; 
@@ -61,13 +59,19 @@ function DetailedView() {
                     filtered[user.team].nvTaken += 1;
                   }
                 } else if (user.preference.includes('VEG')) {
-                  filtered[user.team].vCount += 1;
-                  if (user.taken === true) {
-                    filtered[user.team].vTaken += 1;
+                    filtered[user.team].vCount += 1;
+                    if (user.taken === true) {
+                      filtered[user.team].vTaken += 1;
                   }
                 }
+                else{
+                  console.log('Skipped');
+                }
               });
+            
               setData(filtered);
+              console.log(filtered);
+              console.log(data);
           })
           setLoading(false)
           setFetched(true)
@@ -107,7 +111,8 @@ function DetailedView() {
         </tr>
       </thead>
        <tbody>
-    
+    {data &&
+    <>
       <tr className='DVtr'><p>Ordered</p>
         <td className='DVtd'> {data[team].nvCount} </td>
         <td className='DVtd'> {data[team].vCount} </td>
@@ -123,6 +128,8 @@ function DetailedView() {
         <td className='DVtd'> {data[team].vCount - data[team].vTaken} </td>
         <td className='DVtd'> {data[team].nvCount - data[team].nvTaken + data[team].vCount - data[team].vTaken} </td>
       </tr>
+    </>
+}
 </tbody>
       
     </table>

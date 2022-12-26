@@ -67,6 +67,10 @@ function QrCodeGenerator() {
     const value = JSON.stringify(data)
     const handleSubmit = async(e) =>{
       e.preventDefault()
+      if (team=='') {
+        alert("Team is Required")
+      }
+      else{
       setLoading(true)
       const response = await axios({
         method:'post',
@@ -96,6 +100,7 @@ function QrCodeGenerator() {
       setTeam('')
       setLoading(false)
     }
+  }
 
     const email = document.getElementById("mail");
 if(email){
