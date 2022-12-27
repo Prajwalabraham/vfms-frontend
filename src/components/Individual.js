@@ -103,7 +103,7 @@ return (
         <td className='IVtd'> {el.name} </td>
         <td className='IVtd'> {el.team} </td>
         <td className='IVtd'> {el.preference} </td>
-        <td className='IVtd'> {el.taken} </td>
+        <td className='IVtd'> {String(el.taken)} </td>
       </tr>
 
 
