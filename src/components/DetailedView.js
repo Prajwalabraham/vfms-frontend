@@ -91,6 +91,7 @@ function DetailedView() {
     <br />
     <h2>More Details</h2>
     {fetched ? 
+    <>
     <Select
               className='SelectTeam'
               closeMenuOnSelect={true}
@@ -100,9 +101,12 @@ function DetailedView() {
               name='team'
               onChange={handleSelect}
             />
+            <br/>
+            </>
+
            : 
            <> {loading ? <CircularProgress /> : 
-           <button type="" onClick={viewData}>Refresh</button>
+           <button type="" onClick={viewData}>Team</button>
        }
        </> 
        }
@@ -142,7 +146,7 @@ function DetailedView() {
     </table>
       )}
     <button type="" onClick={Individual} >Individual</button>
-    <button type="" onClick={Back}>Scan</button>
+    <button type="" onClick={Back}>Back</button>
   </div>
   )
 }

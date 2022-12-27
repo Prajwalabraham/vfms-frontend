@@ -13,6 +13,7 @@ function Individual() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [team, setTeam] = useState('');
+  const [fetched, setFetched] = useState(false);
 
   const navigate = useNavigate();
 
@@ -51,6 +52,7 @@ function Individual() {
           console.log(data?.map(el => el.team));
         })
         setLoading(false)
+        setFetched(true)
     }
     
       const Back = (e) => {
@@ -62,6 +64,8 @@ return (
   <div className='Llogin-box'>
   <br />
   <h2>Team Details</h2>
+{fetched?
+<>
   <Select
             className='SelectTeam'
             closeMenuOnSelect={true}
@@ -71,42 +75,48 @@ return (
             name='team'
             onChange={handleSelect}
           />
-          <br />
-          <table className='dvTable'>
-      <thead className='DVthead'>
-        <tr className='DVtr'>
-        <th className='DVth'>Name</th>
-          <th className='DVth'>Team</th>
-          <th className='DVth'>Preference</th>
-          <th className='DVth'>Taken</th>
+          <br/>
+          </>:
+          <>
+           {loading ? <CircularProgress /> : 
+  <button type="" onClick={viewData}>Refresh</button>
+}
+</>}
+  
+          <table className='IvTable'>
+      {fetched?
+      <thead className='IVthead'>
+        <tr className='IVtr'>
+        <th className='IVth'>Name</th>
+          <th className='IVth'>Team</th>
+          <th className='IVth'>Preference</th>
+          <th className='IVth'>Taken</th>
         </tr>
       </thead>
+      :''}
       
-      {data?.map((el => {
-          <>
-          {el.team==team?
-       <tbody>
-        <tr className='DVtr' >
-        <td className='DVtd'> {data.name} </td>
-        <td className='DVtd'> {data.team} </td>
-        <td className='DVtd'> {data.preference} </td>
-        <td className='DVtd'> {data.taken} </td>
+      {data?.map((el, index) => (
+          <tbody>
+        {el.team==team ?
+       
+        <tr className='IVtr' key={index}>
+        <td className='IVtd'> {el.name} </td>
+        <td className='IVtd'> {el.team} </td>
+        <td className='IVtd'> {el.preference} </td>
+        <td className='IVtd'> {el.taken} </td>
       </tr>
 
-</tbody>
+
 
 :''   }
-</>
+</tbody>
 
-}))      
-} 
+))} 
       
     </table> 
 
 
-  {loading ? <CircularProgress /> : 
-  <button type="" onClick={viewData}>Refresh</button>
-}
+ 
   <button type="" onClick={Back}>Back</button>
 </div>
 )
