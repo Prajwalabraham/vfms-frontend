@@ -13,7 +13,7 @@ function Success() {
   
   return (
     <div className='login-box'>
-        <ThumbUpAltRoundedIcon sx={{ fontSize: 210 }} color="primary"  />
+        <span><ThumbUpAltRoundedIcon sx={{ fontSize: 210 }} style={{ color: "green" }}  /></span>
         <h2>Successfully Verified</h2>
     <br/>
         <table className='tTable'>
