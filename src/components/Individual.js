@@ -39,7 +39,7 @@ function Individual() {
         setLoading(true)
         axios({
           method:'get',
-          url: 'http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/viewDetailedKitchen',
+          url: 'https://174.129.136.204/viewDetailedKitchen',
             headers: {
               "Content-type": "application/json"
             },

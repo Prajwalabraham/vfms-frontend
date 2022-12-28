@@ -82,7 +82,7 @@ function QrCodeGenerator() {
       setLoading(true)
       const response = await axios({
         method:'post',
-        url: "http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/main_volunteers",
+        url: "https://174.129.136.204/main_volunteers",
         data: data
       })
       .then(res => {

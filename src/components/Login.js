@@ -35,7 +35,7 @@ function Login() {
         })
         const response = await axios({
             method:'post',
-            url: 'http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/signup',
+            url: 'https://174.129.136.204/signup',
             data: state
         }).then(res =>{
             if (res.status==201) {
@@ -56,7 +56,7 @@ function Login() {
         console.log(state);
         const response = await axios({
             method:'post',
-            url: 'http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/login',
+            url: 'https://174.129.136.204/login',
             data: state
         })
         .then(res => {

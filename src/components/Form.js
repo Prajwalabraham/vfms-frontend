@@ -86,7 +86,7 @@ class Form extends Component {
     else{
     const response = await axios({
       method:'post',
-      url: "http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/foodPreference",
+      url: "https://174.129.136.204/foodPreference",
       data: this.state
     })
     .then(res => {

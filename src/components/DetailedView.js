@@ -35,7 +35,7 @@ function DetailedView() {
           setLoading(true)
           axios({
             method:'get',
-            url: 'https://vfms-server.onrender.com/viewDetailedKitchen',
+            url: 'https://174.129.136.204/viewDetailedKitchen',
               headers: {
                 "Content-type": "application/json"
               },
