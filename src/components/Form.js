@@ -102,6 +102,7 @@ class Form extends Component {
       
     })
     .catch(err => {
+      console.log(err);
       if (err.response.status==406) {
         this.setState({error:true})
         this.setState({errorMsg:'You have already submitted the form this week...!'})
