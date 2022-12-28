@@ -61,7 +61,7 @@ function Individual() {
          
 
 return (
-  <div className='Llogin-box'>
+  <div className='Ilogin-box'>
   <br />
   <h2>Team Details</h2>
 {fetched?
@@ -89,7 +89,7 @@ return (
         <tr className='IVtr'>
         <th className='IVth'>Name</th>
           <th className='IVth'>Team</th>
-          <th className='IVth'>Preference</th>
+          <th className='IVth'>Choice</th>
           <th className='IVth'>Taken</th>
         </tr>
       </thead>
@@ -101,8 +101,8 @@ return (
        
         <tr className='IVtr' key={index}>
         <td className='IVtd'> {el.name} </td>
-        <td className='IVtd'> {el.team} </td>
-        <td className='IVtd'> {el.preference} </td>
+        <td className='IVttd'> {el.team} </td>
+        <td className='IVtd'> {el.preference=="NON-VEG"? <img src="https://img.icons8.com/fluency/48/000000/non-vegetarian-food-symbol.png" alt='NON-VEG' />:<img src="https://img.icons8.com/color/48/000000/vegetarian-food-symbol.png" alt='VEG' />} </td>
         <td className='IVtd'> {String(el.taken)} </td>
       </tr>
 

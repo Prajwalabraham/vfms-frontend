@@ -5,6 +5,36 @@
     border: 3px white;
     border-radius: 3px;
   }
+
+ 
+  .Ilogin-box {
+    position: absolute;
+    left: 50%;
+    table-layout: fixed;
+    width: 390px;
+    padding: 70px;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .Ilogin-box{
+      margin-top: 25%;
+      left: 49.5%;
+      width: 90%;
+      position: absolute;
+      padding: 15px;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,.5);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 10px;
+  }
+  }
+
   h2 {
     margin: 0 0 30px;
     padding: 0;
@@ -35,6 +65,7 @@
   }
 
   .IvTable{
+    table-layout: fixed;
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -44,7 +75,7 @@
 
   .IVtd,  .IVth {
     border: 1px solid #ddd;
-    padding: 3%;
+    padding: 0%;
     text-align: center;
   }
   .IVtr{
@@ -56,6 +87,24 @@
   .IVth {
     padding-top: 3.5%;
     padding-bottom: 3.5%;
+    text-align: center;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+  }
+
+  .IVttd{
+    border: 1px solid #ddd;
+    padding: 0%;
+    word-break: break-all;
+    text-align: center;
+  }
+
+
+  .IVtth {
+    padding-top: 3.5%;
+    word-break: break-all;
+    padding-bottom: 3.5%;
+    word-break: break-all;
     text-align: center;
     background-color: #ffffff;
     color: rgb(0, 0, 0);

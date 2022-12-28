@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import './Form.css'
 import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
 class Form extends Component {
   constructor(props) {
@@ -11,7 +16,10 @@ class Form extends Component {
        name: '',
        preference: '',
        phone:'',
-       loading: false
+       loading: false,
+       error: false,
+       errMsg: '',
+       success:false
     }
   }
   
@@ -46,6 +54,20 @@ class Form extends Component {
 
 
   render() {
+
+    const handleError = (e) => {
+      this.setState({
+        error:false,
+        errorMsg: ''
+      })
+    }
+    
+    const handleSuccess = (e) => {
+      this.setState({
+        success:false
+      })
+    }
+
     const handleSubmit = async(e) =>{
     e.preventDefault()
     this.setState({loading: true})
@@ -62,16 +84,14 @@ class Form extends Component {
       alert("Phone is Required!")
     }
     else{
-    console.log(this.state);
     const response = await axios({
       method:'post',
       url: "http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/foodPreference",
       data: this.state
     })
     .then(res => {
-      console.log(res);
       if (res.status==201) {
-        alert("Successfully Submitted") 
+        this.setState({success:true})
       }
       this.setState({
         name: '',
@@ -82,12 +102,13 @@ class Form extends Component {
       
     })
     .catch(err => {
-      console.log(err);
       if (err.response.status==406) {
-        alert("You have already submitted the form this week...!");
+        this.setState({error:true})
+        this.setState({errorMsg:'You have already submitted the form this week...!'})
       }
       else if(err.response.status==403){
-        alert("You need to create QR Code in order to apply for coupons. Kindly contact your team leader!")
+        this.setState({error:true})
+        this.setState({errorMsg:"You need to create QR Code in order to apply for coupons. Kindly contact your team leader!"})
 
       }
       else{
@@ -102,6 +123,7 @@ class Form extends Component {
     preference: '',
     phone: '',
     loading: false
+
   })
   }
     return (
@@ -109,6 +131,37 @@ class Form extends Component {
           <h2>Food Preference</h2>
           <br />
           <br />
+          {this.state.error?
+          
+          <div>
+           <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
+           <br/>
+           <Stack sx={{ width: '100%' }} spacing={2}>
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              {this.state.errorMsg}
+            </Alert>
+          </Stack>
+           <button type="" onClick = {handleError}>Back</button>
+
+          </div>
+          : 
+          <>
+          {this.state.success? 
+           <div>
+           <span><img src="https://user-images.githubusercontent.com/74299799/209782500-1ef43bd6-dadf-478c-b1e2-b89ecf05428d.png" alt={<CheckCircleOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "green" }} />} /></span>
+           <br/>
+           <Stack sx={{ width: '100%' }} spacing={2}>
+            <Alert severity="success">
+              <AlertTitle>Success</AlertTitle>
+              <strong>Successfully Submitted</strong>
+            </Alert>
+          </Stack>
+           <button type="" onClick = {handleSuccess}>Back</button>
+
+          </div>
+          :
+
           <form onSubmit={handleSubmit} >
             <div class="user-box">
               <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} required='true'/>
@@ -134,6 +187,9 @@ class Form extends Component {
   }
             </div>
           </form> 
+  }
+          </>
+  }
 
         </div>
     )
