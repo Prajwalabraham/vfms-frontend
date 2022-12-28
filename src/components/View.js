@@ -27,7 +27,7 @@ function View() {
     setLoading(true)
     const result = await axios({
       method:'post',
-      url: 'https://vfms-server.onrender.com/viewKitchen',
+      url: 'http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/viewKitchen',
     }).then(response => {
       const result = response.data.rows;
             let filtered = {};

@@ -39,7 +39,7 @@ function Individual() {
         setLoading(true)
         axios({
           method:'get',
-          url: 'https://vfms-server.onrender.com/viewDetailedKitchen',
+          url: 'http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/viewDetailedKitchen',
             headers: {
               "Content-type": "application/json"
             },

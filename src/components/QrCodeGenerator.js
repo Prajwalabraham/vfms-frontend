@@ -74,7 +74,7 @@ function QrCodeGenerator() {
       setLoading(true)
       const response = await axios({
         method:'post',
-        url: "https://vfms-server.onrender.com/main_volunteers",
+        url: "http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/main_volunteers",
         data: data
       })
       .then(res => {

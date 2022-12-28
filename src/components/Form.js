@@ -65,7 +65,7 @@ class Form extends Component {
     console.log(this.state);
     const response = await axios({
       method:'post',
-      url: "https://vfms-server.onrender.com/foodPreference",
+      url: "http://ec2-3-85-163-206.compute-1.amazonaws.com:4000/foodPreference",
       data: this.state
     })
     .then(res => {
