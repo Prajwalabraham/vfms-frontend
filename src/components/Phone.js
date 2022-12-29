@@ -23,6 +23,7 @@ function Phone() {
             ...state,
             [event.target.name]: res
         })
+        console.log(state);
     }
 
 
@@ -30,7 +31,7 @@ function Phone() {
     setisverifying(true)
     console.log(state);
 
-    const response = await axios({
+    axios({
       method:'post',
       url: 'https://174.129.136.204/verify',
       data: state
@@ -90,7 +91,7 @@ const handleError=(e)=>{
 : 
 <>
         <form onSubmit={handleSubmit}>
-            <input name='phone' id='phone' placeholder='Phone' type='tel' pattern="(6|7|8|9)\d{9}$" value={state.phone} onChange={handleChange} required={true}/>
+            <input name='phone' id='phone' placeholder='Phone' type='tel' pattern="(6|7|8|9)\d{9}$" value={state.phone} onChange={handleChange} required />
             
         {isverifying?
         <CircularProgress /> : ''}
