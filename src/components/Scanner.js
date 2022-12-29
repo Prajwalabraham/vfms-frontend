@@ -7,19 +7,19 @@ import {useNavigate} from 'react-router-dom';
 import makeAnimated from 'react-select/animated';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import AlertTitle from '@mui/material/AlertTitle';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
 
 const Scanner = (props) => {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [data, setData] = useState("");
-  const [res, setRes] = useState({
-    name: '',
-    taken: false,
-    preference: '',
-    team: ''
-  });
+  const [err, setErr] = useState(false);
+  const [errMsg, seterrMsg] = useState('');
   const [isverifying, setisverifying] = useState(false);
+  const [phone, setPhone] = useState();
   useEffect(() => {
     document.title = 'QR Scanner';
   }, []);
@@ -46,6 +46,7 @@ const Scanner = (props) => {
 
   const handleError = (err) => {
     console.error(err);
+    navigate('/Scan')
   };
   
   const handleVerify = async(e) =>{
@@ -73,21 +74,28 @@ const Scanner = (props) => {
       alert("There is an internal Server error. Kindly report to the IT team")
     }
   }).catch(err => {
+    console.log(err);
     if (err.response.status == 400) {
-      alert('Volunteer has not applied for coupons this week.')
+      setErr(true)
+      seterrMsg("Volunteer has not applied for coupons this week")
     }
     else if (err.response.status == 401) {
-      alert("The Volunteer has already taken food")
+      setErr(true)
+      seterrMsg("The Volunteer has already taken food")
     }
     else{
-      alert('There is an internal Server error. Kindly report to the IT team')
-
+      setErr(true)
+      seterrMsg("There is an internal Server error. Kindly report to the IT team")
+     
     }
   })
   setisverifying(false)
     // setPrecScan(scanData);
   }
   
+  const Phone =(e) => {
+    navigate('/Phone')
+  }
   
 
 
@@ -97,7 +105,21 @@ const Scanner = (props) => {
     <h2>
       Scanner
     </h2>
+{err ? 
+  <div>
+       <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
+       <br/>
+       <Stack sx={{ width: '100%' }} spacing={2}>
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {errMsg}
+        </Alert>
+      </Stack>
+       <button type="" onClick = {handleError}>Back</button>
 
+      </div>
+: 
+<>
     <button className='scanButton'
       onClick={() => {
         setStartScan(!startScan);
@@ -138,7 +160,10 @@ const Scanner = (props) => {
     {isverifying?
     <CircularProgress /> : '' }
     {data !=="" && <button className='scanButton' type="" onClick={handleVerify} >Verify</button>}
+    </>
+    }
     <button className='scanButton' onClick={View}>View</button>
+    <button className='scanButton' onClick={Phone}>Phone?</button>
   </div>
   );
 };

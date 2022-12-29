@@ -4,6 +4,10 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from './auth'
 import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
+import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
 function Login() {
     const [state, setState] = React.useState({
@@ -15,6 +19,8 @@ function Login() {
     const [comment, setComment] = React.useState();
     const navigate = useNavigate();
     const [loading, setLoading] = React.useState(false);
+    const [err, setErr] = React.useState(false);
+    const [errMsg, seterrMsg] = React.useState('');
 
     function handleChange(event) {
         const value = event.target.value;
@@ -49,6 +55,9 @@ function Login() {
         setLoading(false)
     }
 
+    const handleError=(e) => {
+        navigate('/Login')
+    }
     
     const handleLoginSubmit = async(e) => {
         e.preventDefault();
@@ -66,11 +75,13 @@ function Login() {
                 navigate('/Middle', {replace:true})
             }
         }).catch(err => {
-            if (err.response.status==403) {
-                alert("The Username or Password is Incorrect");
+            if (err.response.status==403) {            
+                setErr(true)
+                seterrMsg("The Username or Password is Incorrect")
               }
             else if (err.response.status==401) {
-                alert("User doesn't Exist. Signup First")
+                setErr(true)
+                seterrMsg("User doesn't Exist. Signup First")
             }
               else{
                 alert('There is an internal Server error. Kindly report to the IT team')
@@ -95,6 +106,20 @@ function Login() {
     
   return (
     <div className="main">  	
+    {err?
+        <div>
+        <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
+        <br/>
+        <Stack sx={{ width: '100%' }} spacing={2}>
+            <Alert severity="error">
+                <AlertTitle>Error</AlertTitle>
+                {errMsg}
+            </Alert>
+        </Stack>
+        <button type="" onClick = {handleError}>Back</button>
+        </div>
+    :
+    <>
 		<input type="checkbox" id="chk" aria-hidden="true" />
 
 			<div className="signup">
@@ -119,6 +144,8 @@ function Login() {
 }
 				</form>
 			</div>
+    </>
+}
 	</div>
   )
 }

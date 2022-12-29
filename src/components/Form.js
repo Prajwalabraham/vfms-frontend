@@ -75,14 +75,6 @@ class Form extends Component {
       alert("All Inputs are Required!!!")
 
     }
-    else if (this.state.name == '') {
-      alert("Name is Required!")
-    } else if (this.state.phone=='') {
-      alert("Phone is Required!")
-    }
-    else if (this.state.preference == '') {
-      alert("Phone is Required!")
-    }
     else{
     const response = await axios({
       method:'post',
