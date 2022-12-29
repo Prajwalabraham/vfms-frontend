@@ -189,7 +189,7 @@ const handleSuccess = (e) =>{
           </div>
 : 
         <form onSubmit={GenerateQRCode}>
-          <input name='name' id='name' placeholder='Full Name' pattern="^(\w\w+)\s(\w+)$" value={state.name} onChange={handleChange} required />
+          <input name='name' id='name' placeholder='Full Name' pattern="^(\w+)\s(\w+)$" value={state.name} onChange={handleChange} required />
             <input name='phone' id='phone' placeholder='Phone' type='tel' pattern="(6|7|8|9)\d{9}$" value={state.phone} onChange={handleChange} required='true'/>
             <input name='email' id='mail' placeholder='Email' type='email'  value={state.email} onChange={handleChange} required />
               <br/>
@@ -208,7 +208,7 @@ const handleSuccess = (e) =>{
         </>
 }
         {qr && <>
-				<img src={qr} alt='' />
+				<img src={qr} alt='' className='qrimg'/>
         <a href={qr} download={`${state.name}.png`} ><button value="Download" >Download</button></a>
 			</>}
       
