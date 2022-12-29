@@ -19,7 +19,6 @@ const Scanner = (props) => {
   const [err, setErr] = useState(false);
   const [errMsg, seterrMsg] = useState('');
   const [isverifying, setisverifying] = useState(false);
-  const [phone, setPhone] = useState();
   useEffect(() => {
     document.title = 'QR Scanner';
   }, []);
@@ -93,10 +92,6 @@ const Scanner = (props) => {
     // setPrecScan(scanData);
   }
   
-  const Phone =(e) => {
-    navigate('/Phone')
-  }
-  
 
 
 
@@ -163,7 +158,6 @@ const Scanner = (props) => {
     </>
     }
     <button className='scanButton' onClick={View}>View</button>
-    <button className='scanButton' onClick={Phone}>Phone?</button>
   </div>
   );
 };
