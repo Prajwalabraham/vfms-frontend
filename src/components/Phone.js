@@ -9,7 +9,9 @@ import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
 function Phone() {
     const [state, setState] = useState({
+      state:{  
         phone: ''
+      }
     });
 
     const [isverifying, setisverifying] = useState(false);    
@@ -20,8 +22,10 @@ function Phone() {
     function handleChange(event) {
         const res = event.target.value;
         setState({
-            ...state,
-            [event.target.name]: res
+          state:{
+            phone: res
+          }
+            
         })
         console.log(state);
     }
@@ -91,7 +95,7 @@ const handleError=(e)=>{
 : 
 <>
         <form onSubmit={handleSubmit}>
-            <input name='phone' id='phone' placeholder='Phone' type='tel' pattern="(6|7|8|9)\d{9}$" value={state.phone} onChange={handleChange} required />
+            <input name='phone' id='phone' placeholder='Phone' type='tel' pattern="(6|7|8|9)\d{9}$" value={state.state.phone} onChange={handleChange} required />
             
         {isverifying?
         <CircularProgress /> : ''}
