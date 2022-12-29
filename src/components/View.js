@@ -18,7 +18,8 @@ function View() {
     {value:'Cleaning', label:'Cleaning'},
     {value:'Media', label:'Media'},
     {value:'Intercession', label:'Intercession'},
-    {value:'Kids Church', label:'Kids Church'}
+    {value:'Kids Church', label:'Kids Church'},
+    {value:'Kitchen', label:'Kitchen'},
 
   
   ]
