@@ -52,7 +52,14 @@
   .viewTh {
     padding-top: 10px;
     padding-bottom: 12px;
-    text-align: left;
+    text-align: center;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
+  }
+
+  .Vimg{
+    image-rendering: crisp-edges;
+    border-radius: 0%;
+    width: 50%;
+
   }

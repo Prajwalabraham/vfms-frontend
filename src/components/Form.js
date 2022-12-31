@@ -19,7 +19,8 @@ class Form extends Component {
        loading: false,
        error: false,
        errMsg: '',
-       success:false
+       success:false,
+       isSat:false
     }
   }
   
@@ -30,7 +31,16 @@ class Form extends Component {
       this.setState({loading: false})
     }
  }
+ componentDidMount() {
+  var curTime = new Date();
+  var day = curTime.getDay();
+  curTime = parseInt(curTime.getHours() + "" + ("0" + curTime.getMinutes()).substr(-2) + "" + ("0" + curTime.getSeconds()).substr(-2));
 
+  if (curTime > 120000 && day == 6 )
+    this.setState({isSat:true})
+  else
+    this.setState({isSat:false})
+}
   handleNameChange = (e) => {
     this.setState({
       name: e.target.value
@@ -120,13 +130,34 @@ class Form extends Component {
   })
   }
     return (
+      <>
+      {this.state.isSat?
+      <>
+       <div class="login-box">
+       <h2>Food Preference</h2>
+       <br />
+       <br />
+        <div className='Formimg'>
+          <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
+          <br/>
+          <Stack sx={{ width: '100%' }} spacing={2}>
+          <Alert severity="error">
+            <AlertTitle>Time Up!</AlertTitle>
+            <bold>The form is no longer aceepting Responses...!!</bold>
+          </Alert>
+        </Stack>
+        </div>
+       </div>
+      </>
+      :
+
         <div class="login-box">
           <h2>Food Preference</h2>
           <br />
           <br />
           {this.state.error?
           
-          <div>
+          <div className='Formimg'>
            <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
            <br/>
            <Stack sx={{ width: '100%' }} spacing={2}>
@@ -141,7 +172,7 @@ class Form extends Component {
           : 
           <>
           {this.state.success? 
-           <div>
+           <div className='Formimg'>
            <span><img src="https://user-images.githubusercontent.com/74299799/209782500-1ef43bd6-dadf-478c-b1e2-b89ecf05428d.png" alt={<CheckCircleOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "green" }} />} /></span>
            <br/>
            <Stack sx={{ width: '100%' }} spacing={2}>
@@ -185,6 +216,8 @@ class Form extends Component {
   }
 
         </div>
+}
+</>
     )
   }
 }

@@ -25,7 +25,7 @@ function Success() {
           <td className='Ttd'>{location.state.team}</td>
           </tr>
           <tr className='Ttr'><p>Preference</p>
-          <td className='Ttd'>{location.state.preference=="NON-VEG"? <img src="https://img.icons8.com/fluency/48/000000/non-vegetarian-food-symbol.png" alt='NON-VEG' /> : <img src="https://img.icons8.com/color/48/000000/vegetarian-food-symbol.png" alt='VEG' />}</td>
+          <td className='Ttd'>{location.state.preference=="NON-VEG"? <img src="https://img.icons8.com/fluency/48/000000/non-vegetarian-food-symbol.png" alt='NON-VEG' className='qrimg' /> : <img src="https://img.icons8.com/color/48/000000/vegetarian-food-symbol.png" alt='VEG' className='qrimg' />}</td>
           </tr>
         </tbody>
       </table>

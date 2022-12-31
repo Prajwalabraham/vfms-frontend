@@ -198,6 +198,7 @@ html {
   }
   .wrapper .option span img{
     border-radius: 0px;
+    image-rendering: auto;
   }
   input[type="radio"]{
     display: none;
@@ -233,4 +234,10 @@ html {
       bottom: 100%;
     }
   }
-  
+  .Formimg span img {
+    image-rendering: auto;
+  }
+
+  img{
+    image-rendering: auto;
+  }

@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import makeAnimated from 'react-select/animated';
+import emailjs from '@emailjs/browser';
 
 function QrCodeGenerator() {
     const [state, setState] = useState({
@@ -23,6 +24,7 @@ function QrCodeGenerator() {
   const [err, setErr] = useState(false);
   const [errMsg, seterrMsg] = useState('');
   const [success, setSuccess] = useState(false);
+  const [qData, setQData] = useState('');
 
   const teams = [
     {value:'Greeters', label:'Greeters'},
@@ -42,7 +44,7 @@ function QrCodeGenerator() {
 	const GenerateQRCode = (e) => {
     e.preventDefault()
 
-		QRCode.toDataURL(value, {
+    QRCode.toDataURL(value, {
 			margin: 2,
 			color: {
 				dark: '#335383FF',
@@ -54,7 +56,11 @@ function QrCodeGenerator() {
 			console.log(value)
 			setQr(value)
       console.log(data);
+      
 		})
+    
+    const q = QRCode.toDataURL(value)
+    console.log(q);
     
 	}
 
@@ -74,6 +80,8 @@ function QrCodeGenerator() {
     const data = {
       state, team
     }
+
+    
     const value = JSON.stringify(data)
     const handleSubmit = async(e) =>{
       e.preventDefault()
@@ -91,7 +99,29 @@ function QrCodeGenerator() {
         console.log(res);
         if(res.status==201){
           setSuccess(true)
+          setLoading(false)
         }
+        // Create the email payload with the QR code image as an attachment
+        const payload = {
+          to: state.email,
+          from: 'prajwalabraham.21@gmail.com',
+          subject: 'Your QR Code for Food Registration',
+          name:state.name,
+          message:"Hope You are well",
+          content: <img src={qr} />,
+          attachments: [{
+            type: 'image/png',
+            name: `${state.name}.png`,
+            content: <img src={qr} alt='' className='qrimg' id='can'/>
+          }],
+        };
+          // Send the email
+          emailjs.send('service_aba32m4', 'template_n8elir1', payload, 'YTpVlO_BQFrixAW-Y')
+          .then(function(response) {
+            console.log('Success!', response.status, response.text);
+          }, function(error) {
+            console.log('Failed...', error);
+          });
       })
       .catch(err => {
         console.log(err);
@@ -110,6 +140,13 @@ function QrCodeGenerator() {
       })
       setTeam('')
       setLoading(false)
+
+      
+  
+
+
+
+
     }
   }
 
@@ -208,7 +245,7 @@ const handleSuccess = (e) =>{
         </>
 }
         {qr && <>
-				<img src={qr} alt='' className='qrimg'/>
+				<img src={qr} alt='' className='qrimg' id='can'/>
         <a href={qr} download={`${state.name}.png`} ><button value="Download" >Download</button></a>
 			</>}
       
