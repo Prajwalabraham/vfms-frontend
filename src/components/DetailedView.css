@@ -14,23 +14,19 @@
     width: 390px;
     padding: 70px;
     transform: translate(-50%, -50%);
-    background: rgba(0,0,0,.5);
     box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
   }
 
   @media screen and (max-width: 768px) {
     .Ilogin-box{
-      margin-top: 25%;
       left: 49.5%;
-      width: 90%;
+      width: 100%;
+      height: 100%;
       position: absolute;
       padding: 15px;
       transform: translate(-50%, -50%);
-      background: rgba(0,0,0,.5);
       box-sizing: border-box;
-      box-shadow: 0 15px 25px rgba(0,0,0,.6);
       border-radius: 10px;
   }
   }
@@ -104,10 +100,9 @@
 
   .IVtd img {
     border-radius: 0px;
-    padding: 15px;
+    padding: 20px;
     background-color: rgb(255, 255, 255);
   }
-
 
   .IVtth {
     padding-top: 3.5%;

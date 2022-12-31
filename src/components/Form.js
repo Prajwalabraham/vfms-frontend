@@ -24,6 +24,7 @@ class Form extends Component {
     }
   }
   
+  
   toggleLoader = () => {
     if(!this.state.loading){
       this.setState({loading: true})

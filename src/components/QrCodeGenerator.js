@@ -37,6 +37,7 @@ function QrCodeGenerator() {
 
   
   ]
+  
 
   const [loading, setLoading] = useState(false);
 	const [qr, setQr] = useState('')
@@ -102,26 +103,7 @@ function QrCodeGenerator() {
           setLoading(false)
         }
         // Create the email payload with the QR code image as an attachment
-        const payload = {
-          to: state.email,
-          from: 'prajwalabraham.21@gmail.com',
-          subject: 'Your QR Code for Food Registration',
-          name:state.name,
-          message:"Hope You are well",
-          content: <img src={qr} />,
-          attachments: [{
-            type: 'image/png',
-            name: `${state.name}.png`,
-            content: <img src={qr} alt='' className='qrimg' id='can'/>
-          }],
-        };
-          // Send the email
-          emailjs.send('service_aba32m4', 'template_n8elir1', payload, 'YTpVlO_BQFrixAW-Y')
-          .then(function(response) {
-            console.log('Success!', response.status, response.text);
-          }, function(error) {
-            console.log('Failed...', error);
-          });
+        
       })
       .catch(err => {
         console.log(err);

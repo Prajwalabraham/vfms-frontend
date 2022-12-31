@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './DetailedView.css'
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios'
@@ -26,7 +26,8 @@ function DetailedView() {
       {value:'Kitchen', label:'Kitchen'},
 
     ]
-  
+
+
 
     const handleSelect = (e) => {
         setTeam(e.value)

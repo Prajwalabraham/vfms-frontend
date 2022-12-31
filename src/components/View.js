@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './View.css';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -11,6 +11,7 @@ function View() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  
 
   
   const teams = [
@@ -24,6 +25,11 @@ function View() {
   
   ]
 
+  useEffect(() => {
+    
+  }, []);
+
+  
   const viewData = async(e) =>{
     setLoading(true)
     const result = await axios({

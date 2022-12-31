@@ -39,6 +39,7 @@ const Scanner = (props) => {
   };
 }
 
+
   const View = (e) => {
     navigate('/View')
   }
