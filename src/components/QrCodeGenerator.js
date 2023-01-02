@@ -33,16 +33,6 @@ function QrCodeGenerator() {
     {value:'Kitchen', label:'Kitchen'},
   ]
 
-  var smtpConfig = {
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, // use SSL
-    auth: {
-        user: 'prajwalabraham.21@gmail.com',
-        pass: 'atdktyxlyzwoxbhd'
-    }
-};
-
   
 
 
