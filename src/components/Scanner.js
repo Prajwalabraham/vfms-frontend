@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react'
-import QrReader from 'react-qr-reader'
+import QrReader from 'modern-react-qr-reader'
 import './Scanner.css';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -93,15 +93,20 @@ const Scanner = (props) => {
     // setPrecScan(scanData);
   }
   
-
-
+const handleBackError =(e)=>{
+  setErr(false)
+  seterrMsg('')
+  setData('')
+}
 
   return (
+    
     <div className="login-box">
     <h2>
       Scanner
     </h2>
 {err ? 
+
   <div>
        <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
        <br/>
@@ -111,7 +116,7 @@ const Scanner = (props) => {
           {errMsg}
         </Alert>
       </Stack>
-       <button type="" onClick = {handleError}>Back</button>
+       <button type="" onClick = {handleBackError}>Back</button>
 
       </div>
 : 
@@ -125,13 +130,16 @@ const Scanner = (props) => {
       {startScan ? "Stop Scan" : "Start Scan"}
     </button>
     {startScan && (
+      
       <>
+      
         <QrReader
-          delay={1000}
+          delay={100}
           onError={handleError}
           onScan={handleScan}
           // chooseDeviceId={()=>selected}
           style={{ width: "100%", height: "100%" }}
+          legacymode
         />
       </>
     )}

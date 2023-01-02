@@ -1,111 +1,76 @@
-import React, {useState} from 'react'
-import axios from 'axios';
+import React from 'react'
+import axios from 'axios'
+import QRCode from 'qrcode.react';
+import { useState, useEffect } from 'react'
 import CircularProgress from '@mui/material/CircularProgress';
-import {useNavigate} from 'react-router-dom';
+import './QrCodeGenerator.css'
+import Select from 'react-select';
 import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
-
-function Phone() {
-    const [state, setState] = useState({
-      state:{  
-        phone: ''
-      }
-    });
-
-    const [isverifying, setisverifying] = useState(false);    
-    const [err, setErr] = useState(false);
-    const [errMsg, seterrMsg] = useState('');
-
-    const navigate = useNavigate()
-    function handleChange(event) {
-        const res = event.target.value;
-        setState({
-          state:{
-            phone: res
-          }
-            
-        })
-        console.log(state);
-    }
+import makeAnimated from 'react-select/animated';
+import emailjs from '@emailjs/browser';
+import ReactDOM from 'react-dom';
+import {QRCodeCanvas} from 'qrcode.react';
 
 
-    const handleSubmit =async(e)=>{
-    setisverifying(true)
-    console.log(state);
+export default function Phone() {
 
-    axios({
-      method:'post',
-      url: 'https://174.129.136.204/verify',
-      data: state
-  }).then(res => {
-    console.log(res);
-    if (res.status == 201) {
-      navigate('/Success', {
-        state:{
-          name:res.data.resName,
-          taken:res.data.resTaken,
-          preference:res.data.resPreference,
-          team:res.data.resTeam,
-        }
-      })
-    }
-    else{
-      alert("There is an internal Server error. Kindly report to the IT team")
-    }
-  }).catch(err => {
-    console.log(err);
-    if (err.response.status == 400) {
-      setErr(true)
-      seterrMsg("Volunteer has not applied for coupons this week")
-    }
-    else if (err.response.status == 401) {
-      setErr(true)
-      seterrMsg("The Volunteer has already taken food")
-    }
-    else{
-      setErr(true)
-      seterrMsg("There is an internal Server error. Kindly report to the IT team")
-     
-    }
-  })
-  setisverifying(false)
-    }
 
-const handleError=(e)=>{
-    navigate('/Scan')
-}
-
+  const [inputText, setInputText] = useState('');
+  const [qrCodeText, setQRCodeText] = useState('');
+ 
+  // generate QR code
+  const generateQRCode = () => {
+    setQRCodeText(inputText);
+  }
+ 
+  // download QR code
+  const downloadQRCode = () => {
+    const qrCodeURL = document.getElementById('qrCodeEl')
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    console.log(qrCodeURL)
+    let aEl = document.createElement("a");
+    aEl.href = qrCodeURL;
+    aEl.download = "QR_Code.png";
+    document.body.appendChild(aEl);
+    aEl.click();
+    document.body.removeChild(aEl);
+  }
+ 
   return (
-    <div className='login-box'>
-        {err ? 
-  <div>
-       <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
-       <br/>
-       <Stack sx={{ width: '100%' }} spacing={2}>
-        <Alert severity="error">
-          <AlertTitle>Error</AlertTitle>
-          {errMsg}
-        </Alert>
-      </Stack>
-       <button type="" onClick = {handleError}>Back</button>
-
-      </div>
-: 
-<>
-        <form onSubmit={handleSubmit}>
-            <input name='phone' id='phone' placeholder='Phone' type='tel' pattern="(6|7|8|9)\d{9}$" value={state.state.phone} onChange={handleChange} required />
-            
-        {isverifying?
-        <CircularProgress /> : ''}
-        <button type="submit">Verify</button>
+    <div className="App">
+      <h3>Generate and download a QR code image in React - <a href="https://www.cluemediator.com/" target="_blank" rel="noopener noreferrer">Clue Mediator</a></h3>
+      <div className="qr-input">
+        <input
+          type="text"
+          placeholder="Enter input"
+          value={inputText}
+          onChange={e => setInputText(e.target.value)}
+        />
+        <input
+          type="button"
+          value="Generate"
+          onClick={generateQRCode}
+        />
+      </div><div style={{ height: "auto", margin: "0 auto", maxWidth: 64, width: "50%" }}>
+      <QRCode
+        id="qrCodeEl"
+        size={1000}
+        value={qrCodeText}
+      />
         
-        </form>
-</>
-}
+      </div>
+      <br />
+      <input
+        type="button"
+        className="download-btn"
+        value="Download"
+        onClick={downloadQRCode}
+      />
     </div>
-  )
+  );
 }
-
-export default Phone

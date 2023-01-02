@@ -48,9 +48,11 @@ function QrCodeGenerator() {
     QRCode.toDataURL(value, {
 			margin: 2,
 			color: {
-				dark: '#335383FF',
-				light: '#EEEEEEFF'
-			}
+				dark: '#000000',
+				light: '#ffffff'
+			},
+      width: 2000,
+      height:2000
 		}, (err, value) => {
 			if (err) return console.error(err)
 

@@ -32,7 +32,7 @@ function App() {
         <Route path='/QR' element={<QrCodeGenerator />}  />
         <Route path='/Success' element={<Success />}  />
         <Route path='/Individual' element={<Protected><Individual /></Protected>}  />
-        <Route path='/Phone' element={<Protected><Phone /></Protected>}  />
+        <Route path='/Phone' element={<Phone />}  />
         <Route path='/DV' element = {<Protected><DetailedView /></Protected>} />
 
 
