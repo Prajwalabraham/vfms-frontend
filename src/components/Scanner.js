@@ -135,6 +135,7 @@ const handleBackError =(e)=>{
       
         <QrReader
           delay={100}
+          className='qr-image-wrapper'
           onError={handleError}
           onScan={handleScan}
           // chooseDeviceId={()=>selected}

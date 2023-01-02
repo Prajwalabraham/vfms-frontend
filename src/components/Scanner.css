@@ -179,3 +179,12 @@ html {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
 }
+
+.qr-image-wrapper section { 
+  border-radius: 26px;                   
+}
+
+.qr-image-wrapper section div {
+  box-shadow: unset !important; 
+  z-index: 1;  
+}

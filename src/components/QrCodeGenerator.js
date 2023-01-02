@@ -11,7 +11,6 @@ import Stack from '@mui/material/Stack';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import makeAnimated from 'react-select/animated';
-import emailjs from '@emailjs/browser';
 
 function QrCodeGenerator() {
     const [state, setState] = useState({
@@ -24,7 +23,6 @@ function QrCodeGenerator() {
   const [err, setErr] = useState(false);
   const [errMsg, seterrMsg] = useState('');
   const [success, setSuccess] = useState(false);
-  const [qData, setQData] = useState('');
 
   const teams = [
     {value:'Greeters', label:'Greeters'},
@@ -33,11 +31,21 @@ function QrCodeGenerator() {
     {value:'Intercession', label:'Intercession'},
     {value:'Kids Church', label:'Kids Church'},
     {value:'Kitchen', label:'Kitchen'},
-
-
-  
   ]
+
+  var smtpConfig = {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // use SSL
+    auth: {
+        user: 'prajwalabraham.21@gmail.com',
+        pass: 'atdktyxlyzwoxbhd'
+    }
+};
+
   
+
+
 
   const [loading, setLoading] = useState(false);
 	const [qr, setQr] = useState('')
@@ -81,7 +89,7 @@ function QrCodeGenerator() {
       console.log(data);
     }
     const data = {
-      state, team
+      state, team, qr
     }
 
     
@@ -103,6 +111,15 @@ function QrCodeGenerator() {
         if(res.status==201){
           setSuccess(true)
           setLoading(false)
+          axios({
+            method:'post',
+            url: "https://174.129.136.204/send" ,
+            data: data
+          }).then(res => {
+            console.log(res);
+          }).catch(err => {
+            console.log(err);
+          })
         }
         // Create the email payload with the QR code image as an attachment
         
@@ -116,6 +133,7 @@ function QrCodeGenerator() {
         else{
           alert('There is an internal Server error. Kindly report to the IT team')
         }
+        
       })
       setState({
         name:'',
@@ -125,7 +143,7 @@ function QrCodeGenerator() {
       setTeam('')
       setLoading(false)
 
-      
+      setQr('')
   
 
 
@@ -172,6 +190,15 @@ phone.addEventListener("input", (event) => {
 const handleError = (e) =>{
   setErr(false)
   seterrMsg('')
+  setState({
+    
+    name:'',
+    phone:'',
+    email:''
+  })
+  setTeam('')
+  setQr('')
+
 }
 const handleSuccess = (e) =>{
   setSuccess(false)
