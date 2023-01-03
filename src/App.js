@@ -12,6 +12,7 @@ import Success from './components/Success'
 import DetailedView from './components/DetailedView'
 import Individual from './components/Individual'
 import Phone from './components/Phone'
+import SForm from './components/SForm.js'
 
 function App() {
   useEffect(() => {
@@ -22,6 +23,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Form />}  />
+        <Route path='/S' element={<SForm />}  />
         <Route path='/Middle' element={<Protected>
           <Middleman />
           </Protected>}  />

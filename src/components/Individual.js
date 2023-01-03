@@ -14,7 +14,7 @@ function Individual() {
   const [loading, setLoading] = useState(false);
   const [team, setTeam] = useState('');
   const [fetched, setFetched] = useState(false);
-
+  const [bC, setBC] = useState('');
   const navigate = useNavigate();
 
   const animatedComponents = makeAnimated();
@@ -59,7 +59,15 @@ function Individual() {
       const Back = (e) => {
         navigate('/View')
       }
-         
+      
+      const getColor=(val)=>{
+        if (val=='true') {
+          setBC('green')
+        }
+        else{
+          setBC('red')
+        }
+      }
 
 return (
   <>
@@ -107,7 +115,11 @@ return (
         <td className='IVtd'> {el.name} </td>
         <td className='IVttd'> {el.team} </td>
         <td className='IVtd'> {el.preference=="NON-VEG"? <img src="https://user-images.githubusercontent.com/74299799/210125736-3e021162-9217-4f6c-9d61-f9aceaa6e468.svg" alt='NON-VEG' />:<img src="https://user-images.githubusercontent.com/74299799/210125735-9d1831f4-28e3-4a8a-885a-0493de559372.svg" alt='VEG' />} </td>
-        <td className='IVtd'> {String(el.taken)=="true" ? <span style={{color: 'green'}} >Yes</span> : <span style={{color:'red'}}>No</span>} </td>
+        {String(el.taken)=="true"? 
+                <td className='IVtd'style={{backgroundColor: 'rgb(0, 200, 90)'}}><strong>Yes</strong></td>
+                : 
+        <td className='IVtd'style={{backgroundColor: 'rgb(255, 0, 60)'}}><strong>No</strong></td>
+}
       </tr>
 
 :''   }
