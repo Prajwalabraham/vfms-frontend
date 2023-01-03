@@ -26,13 +26,7 @@ function View() {
   ]
 
   useEffect(() => {
-    
-  }, []);
-
-  
-  const viewData = async(e) =>{
-    setLoading(true)
-    const result = await axios({
+    const result =  axios({
       method:'post',
       url: 'https://174.129.136.204/viewKitchen',
     }).then(response => {
@@ -74,8 +68,8 @@ function View() {
         alert("Internal server error. Kindly report to the IT team")
       }*/
     })
-    setLoading(false)
-}
+  }, []);
+
 
   const Back = (e) => {
     
@@ -116,9 +110,6 @@ function View() {
         </tbody>
       </table>
       <br />
-      {loading ?  <CircularProgress /> :
-      <button onClick={viewData}>Refresh</button>
-  }
   
   <button onClick={Back} >Back</button>
   <button onClick={moreDetails}>More Details</button>
