@@ -31,6 +31,7 @@ function QrCodeGenerator() {
     {value:'Intercession', label:'Intercession'},
     {value:'Kids Church', label:'Kids Church'},
     {value:'Kitchen', label:'Kitchen'},
+    {value: 'Offering', label:'Offering'}
   ]
 
   
@@ -103,7 +104,7 @@ function QrCodeGenerator() {
           setLoading(false)
           axios({
             method:'post',
-            url: "https://174.129.136.204/send" ,
+            url: "https://vfms-emailserver.onrender.com/send" ,
             data: data
           }).then(res => {
             console.log(res);
