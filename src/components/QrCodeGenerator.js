@@ -23,17 +23,23 @@ function QrCodeGenerator() {
   const [err, setErr] = useState(false);
   const [errMsg, seterrMsg] = useState('');
   const [success, setSuccess] = useState(false);
-
   const teams = [
     {value:'Greeters', label:'Greeters'},
     {value:'Cleaning', label:'Cleaning'},
     {value:'Media', label:'Media'},
     {value:'Intercession', label:'Intercession'},
-    {value:'Kids Church', label:'Kids Church'},
-    {value:'Kitchen', label:'Kitchen'},
-    {value: 'Offering', label:'Offering'}
-  ]
+    {value:'Kids-Church', label:'Kids Church'},
+    {value:'Chair*Arrangement', label:'Chair Arrangement '},
+    {value:'Ground Maintenance', label:'Ground Maintenance '},
+    {value:'Holy-Communion', label:'Holy Communion'},
+    {value:'New-Comers ', label:'New Comers '},
+    {value:'Offering', label:'Offering'},
+    {value:'Resources', label:'Resources'},
+    {value:'Parking', label:'Parking'},
+    {value:'Projection', label:'Projection'},
+    {value:'Sound', label:'Sound'},
 
+  ]
   
 
 
