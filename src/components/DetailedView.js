@@ -12,6 +12,8 @@ function DetailedView() {
     const [loading, setLoading] = useState(false);
     const [team, setTeam] = useState('');
     const [fetched, setFetched] = useState(false);
+    const [leadNum, setLeadNum] = useState('');
+    const [leadEmail, setLeadEmail] = useState('');
   
     const navigate = useNavigate();
 
@@ -94,6 +96,96 @@ function DetailedView() {
         const Individual = (e) => {
           navigate('/Individual')
         }
+        const Notify = (e) => {
+          const data = {
+            leadNum, leadEmail, team
+          }
+          console.log(data);
+          axios({
+            method:'post',
+            url: 'http://localhost:4000/notify',
+            data: data
+          }).then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        }
+useEffect(() => {
+  if (team=="Greeters") {
+    setLeadNum('9901561850')
+    setLeadEmail("prajwalabraham.21@gmail.com")
+  }
+  else if (team == "Cleaning") {
+    //done
+    setLeadNum('9113872612')
+    setLeadEmail("jay.professional@gmail.com")
+  }
+  else if (team == "Media") {
+    //not done
+    setLeadNum('')
+    setLeadEmail("")
+  }
+  else if (team == "Intercession") {
+    
+    setLeadNum('9945655882')
+    setLeadEmail("ravi@bethelag.in")
+  }
+  else if (team == "Kids-Church") {
+    
+    setLeadNum('')
+    setLeadEmail('')
+  }
+  else if (team == "Chair-Arrangement") {
+    
+    setLeadNum("9972027027")
+    setLeadEmail("cyril@masterstechnology.in")
+  }
+  else if (team == "Ground-Maintenance") {
+    
+    setLeadNum("9986331829")
+    setLeadEmail("mjanastin@gmail.com")
+  }
+  else if (team == "Holy-Communion") {
+    
+    setLeadNum('9945655882')
+    setLeadEmail("ravi@bethelag.in")
+  }
+  else if (team == "New-Comers") {
+    setLeadNum('')
+    setLeadEmail('')
+  }
+  else if (team == "Offering") {
+    
+    setLeadNum("9980406002")
+    setLeadEmail("anandhg777@gmail.com")
+  }
+  else if (team == "Resource-Center") {
+    
+    setLeadNum("9980406002")
+    setLeadEmail("anandhg777@gmail.com")
+  }
+  else if (team == "Parking") {
+    setLeadNum('8105696869')
+    setLeadEmail("cmjames4@gmail.com")
+  }
+  else if (team == "Projection") {
+    
+    setLeadNum("7795474138")
+    setLeadEmail("ashvifrancis112@gmail.com")
+  }
+  else if (team == "Sound") {
+    
+    setLeadNum('')
+    setLeadEmail("")
+  }
+  else {
+    console.log("No team Selected");
+  }
+  console.log(leadNum);
+}, [team, leadNum]);
+
 
   return (
     <div className='Llogin-box'>
@@ -153,7 +245,11 @@ function DetailedView() {
 </tbody>
       
     </table>
+    
       )}
+      
+{team &&
+    <button type="" onClick={Notify} >Notify Leader</button>}
     <button type="" onClick={Individual} >Individual</button>
     <button type="" onClick={Back}>Back</button>
   </div>

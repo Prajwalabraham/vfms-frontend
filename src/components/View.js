@@ -37,7 +37,6 @@ function View() {
       url: 'https://174.129.136.204/viewKitchen',
     }).then(response => {
       const result = response.data.rows;
-      console.log(result);
             let filtered = {};
               
                 filtered = {
