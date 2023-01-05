@@ -103,7 +103,7 @@ function DetailedView() {
           console.log(data);
           axios({
             method:'post',
-            url: 'http://localhost:4000/notify',
+            url: 'https://vfms-emailserver.onrender.com/notify',
             data: data
           }).then(res => {
             console.log(res);
