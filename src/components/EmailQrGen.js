@@ -108,8 +108,11 @@ const [WhatsappUrl, setWhatsappUrl] = useState('');
             data: data
           }).then(res => {
             console.log(res);
+            setSuccess(true)
           }).catch(err => {
             console.log(err);
+            setErr(true)
+            seterrMsg(err.response)
           })
         
         // Create the email payload with the QR code image as an attachment
