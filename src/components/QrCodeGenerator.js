@@ -24,6 +24,8 @@ function QrCodeGenerator() {
   const [err, setErr] = useState(false);
   const [errMsg, seterrMsg] = useState('');
   const [success, setSuccess] = useState(false);
+const [WhatsappUrl, setWhatsappUrl] = useState('');
+
   const teams = [
     {value:'Greeters', label:'Greeters'},
     {value:'Cleaning', label:'Cleaning'},
@@ -163,6 +165,7 @@ function QrCodeGenerator() {
       text: 'YourQRCode',
     };
     const fileUrl = URL.createObjectURL(file)
+    setWhatsappUrl(fileUrl)
     console.log(fileUrl);
     console.log(file);
     if(navigator.share) {
@@ -291,7 +294,6 @@ const handleSuccess = (e) =>{
       
       {loading ?  <CircularProgress /> :
       <button onClick={handleSubmit}>Submit</button>}
-      <button type="" onClick={handleShare}></button>
       <br/>       
     </div>
 
