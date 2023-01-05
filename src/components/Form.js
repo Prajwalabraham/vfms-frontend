@@ -82,7 +82,7 @@ class Form extends Component {
     const handleSubmit = async(e) =>{
     e.preventDefault()
     this.setState({loading: true})
-    if (this.state.name == '' && this.state.phone == '' && this.state.preference == '') {
+    if (this.state.name == '' || this.state.phone == '' || this.state.preference == '') {
       alert("All Inputs are Required!!!")
 
     }

@@ -19,12 +19,12 @@ function View() {
     {value:'Media', label:'Media'},
     {value:'Intercession', label:'Intercession'},
     {value:'Kids-Church', label:'Kids Church'},
-    {value:'Chair*Arrangement', label:'Chair Arrangement '},
-    {value:'Ground Maintenance', label:'Ground Maintenance '},
+    {value:'Chair-Arrangement', label:'Chair Arrangement '},
+    {value:'Ground-Maintenance', label:'Ground Maintenance '},
     {value:'Holy-Communion', label:'Holy Communion'},
     {value:'New-Comers ', label:'New Comers '},
     {value:'Offering', label:'Offering'},
-    {value:'Resources', label:'Resources'},
+    {value:'Resource-Center', label:'Resource Center'},
     {value:'Parking', label:'Parking'},
     {value:'Projection', label:'Projection'},
     {value:'Sound', label:'Sound'},
@@ -37,6 +37,7 @@ function View() {
       url: 'https://174.129.136.204/viewKitchen',
     }).then(response => {
       const result = response.data.rows;
+      console.log(result);
             let filtered = {};
               
                 filtered = {
