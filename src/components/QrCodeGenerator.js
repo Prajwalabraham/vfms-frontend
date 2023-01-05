@@ -162,13 +162,20 @@ function QrCodeGenerator() {
       title: 'QRCode',
       text: 'YourQRCode',
     };
-    try {
-      if (!navigator.canShare(data)) {
-        console.error("Can't share");
-      }
-      await navigator.share(data);
-    } catch (err) {
-      console.error(err);
+    const fileUrl = URL.createObjectURL(file)
+    console.log(fileUrl);
+    console.log(file);
+    if(navigator.share) {
+      await navigator.share({
+        title: "title",
+        text: "your text",
+        url: fileUrl,
+        files: [data]     
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error in sharing', error));
+    }else {
+      console.log(`system does not support sharing files.`);
     }
     
 
