@@ -12,6 +12,7 @@ import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import makeAnimated from 'react-select/animated';
 
+
 function QrCodeGenerator() {
     const [state, setState] = useState({
         name:'',
@@ -67,8 +68,7 @@ function QrCodeGenerator() {
       
 		})
     
-    const q = QRCode.toDataURL(value)
-    console.log(q);
+
     
 	}
 
@@ -151,23 +151,7 @@ function QrCodeGenerator() {
   }
 
   const handleShare =(e)=>{
-    const response = qr;
-        // here image is url/location of image
-        //const blob =response.blob();
-        const file = new File([response], 'share.png', {type: "image/png"});
-        console.log(file);
-        if(navigator.share) {
-            navigator.share({
-            title: "BEthel VFMS",
-            text: "HI I am Image",
-            url: "url to share",
-            files: [file]     
-          })
-            .then(() => console.log('Successful share'))
-            .catch((error) => console.log('Error in sharing', error));
-        }else {
-          console.log(`system does not support sharing files.`);
-        }
+       
   }
 
 const email = document.getElementById("mail");
