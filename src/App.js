@@ -13,6 +13,7 @@ import DetailedView from './components/DetailedView'
 import Individual from './components/Individual'
 import Phone from './components/Phone'
 import SForm from './components/SForm.js'
+import EmailQrGen from './components/EmailQrGen'
 
 function App() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
         <Route path='/Success' element={<Success />}  />
         <Route path='/Individual' element={<Protected><Individual /></Protected>}  />
         <Route path='/Phone' element={<Phone />}  />
+        <Route path='/EQG' element={<EmailQrGen />}  />
         <Route path='/DV' element = {<Protected><DetailedView /></Protected>} />
 
 
