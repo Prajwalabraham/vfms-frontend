@@ -110,7 +110,7 @@ function QrCodeGenerator() {
           setLoading(false)
           axios({
             method:'post',
-            url: "https://vfms-emailserver.onrender.com/send" ,
+            url: "http://localhost:4000/send" ,
             data: data
           }).then(res => {
             console.log(res);
@@ -119,6 +119,7 @@ function QrCodeGenerator() {
           })
         }
         // Create the email payload with the QR code image as an attachment
+        
         
       })
       .catch(err => {
@@ -147,6 +148,26 @@ function QrCodeGenerator() {
 
 
     }
+  }
+
+  const handleShare =(e)=>{
+    const response = qr;
+        // here image is url/location of image
+        //const blob =response.blob();
+        const file = new File([response], 'share.png', {type: "image/png"});
+        console.log(file);
+        if(navigator.share) {
+            navigator.share({
+            title: "BEthel VFMS",
+            text: "HI I am Image",
+            url: "url to share",
+            files: [file]     
+          })
+            .then(() => console.log('Successful share'))
+            .catch((error) => console.log('Error in sharing', error));
+        }else {
+          console.log(`system does not support sharing files.`);
+        }
   }
 
 const email = document.getElementById("mail");
@@ -259,6 +280,7 @@ const handleSuccess = (e) =>{
       
       {loading ?  <CircularProgress /> :
       <button onClick={handleSubmit}>Submit</button>}
+      <button type="" onClick={handleShare}></button>
       <br/>       
     </div>
 
