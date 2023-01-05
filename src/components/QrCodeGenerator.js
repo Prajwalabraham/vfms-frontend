@@ -150,8 +150,28 @@ function QrCodeGenerator() {
     }
   }
 
-  const handleShare =(e)=>{
-       
+  const handleShare = async(e)=>{
+    const file = new Blob([qr], {type: "image/png"})
+    console.log(file);
+    const data = {
+      files: [
+        new File([file], 'image.png', {
+          type: file.type,
+        }),
+      ],
+      title: 'QRCode',
+      text: 'YourQRCode',
+    };
+    try {
+      if (!navigator.canShare(data)) {
+        console.error("Can't share");
+      }
+      await navigator.share(data);
+    } catch (err) {
+      console.error(err);
+    }
+    
+
   }
 
 const email = document.getElementById("mail");

@@ -96,22 +96,26 @@ function View() {
             </th>
             <th className='viewTh'><img src="https://user-images.githubusercontent.com/74299799/210125736-3e021162-9217-4f6c-9d61-f9aceaa6e468.svg" alt='NON-VEG' className='Vimg' /></th>
             <th className='viewTh'><img src="https://user-images.githubusercontent.com/74299799/210125735-9d1831f4-28e3-4a8a-885a-0493de559372.svg" alt='VEG' className='Vimg' /></th>
+            <th className='viewTh' >Total</th>
           </tr>
         </thead>
         <tbody className='viewTbody'>
           <tr className='viewTr'><p>Ordered</p>
           <td className='viewTd'>{data.nvCount}</td>
           <td className='viewTd'>{data.vCount}</td>
+          <td className='viewTd'>{data.vCount+data.nvCount}</td>
           </tr>
           
           <tr className='viewTr'><p>Recieved</p>
           <td className='viewTd'>{data.nvTaken}</td>
           <td className='viewTd'>{data.vTaken}</td>
+          <td className='viewTd'>{data.vTaken+data.nvTaken}</td>
           </tr>
           
           <tr className='viewTr'><p>Remaining</p>
           <td className='viewTd'>{data.nvCount - data.nvTaken}</td>
           <td className='viewTd'>{data.vCount - data.vTaken}</td>
+          <td className='viewTd'>{(data.vCount - data.vTaken)+ (data.nvCount - data.nvTaken)}</td>
           </tr>
         </tbody>
       </table>
