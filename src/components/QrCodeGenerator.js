@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import makeAnimated from 'react-select/animated';
+import {InlineShareButtons} from 'sharethis-reactjs';
 
 
 function QrCodeGenerator() {
@@ -153,6 +154,7 @@ const [WhatsappUrl, setWhatsappUrl] = useState('');
   }
 
   const handleShare = async(e)=>{
+    /*
     const file = new Blob([qr], {type: "image/png"})
     console.log(file);
     const data = {
@@ -181,7 +183,7 @@ const [WhatsappUrl, setWhatsappUrl] = useState('');
       console.log(`system does not support sharing files.`);
     }
     
-
+*/
   }
 
 const email = document.getElementById("mail");
@@ -294,6 +296,7 @@ const handleSuccess = (e) =>{
       
       {loading ?  <CircularProgress /> :
       <button onClick={handleSubmit}>Submit</button>}
+        />
       <br/>       
     </div>
 
