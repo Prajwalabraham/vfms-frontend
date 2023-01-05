@@ -110,7 +110,7 @@ function QrCodeGenerator() {
           setLoading(false)
           axios({
             method:'post',
-            url: "http://localhost:4000/send" ,
+            url: "https://vfms-emailserver.onrender.com/send" ,
             data: data
           }).then(res => {
             console.log(res);
