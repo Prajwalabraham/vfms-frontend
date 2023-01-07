@@ -40,6 +40,7 @@ function Individual() {
     {value:'Parking', label:'Parking'},
     {value:'Projection', label:'Projection'},
     {value:'Sound', label:'Sound'},
+    {value:'Kitchen', label:'Kitchen'}
 
   ]
 

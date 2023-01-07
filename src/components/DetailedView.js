@@ -19,7 +19,7 @@ function DetailedView() {
 
     const animatedComponents = makeAnimated();
 
-    const teams = useMemo(() =>[
+    const teams = useMemo(() => [
       {value:'Greeters', label:'Greeters'},
       {value:'Cleaning', label:'Cleaning'},
       {value:'Media', label:'Media'},
@@ -34,6 +34,8 @@ function DetailedView() {
       {value:'Parking', label:'Parking'},
       {value:'Projection', label:'Projection'},
       {value:'Sound', label:'Sound'},
+      {value:'Kitchen', label:'Kitchen'}
+  
     ], [])
 
       
