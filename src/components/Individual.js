@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import './DetailedView.css'
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios'
@@ -6,6 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Select from 'react-select';
 import ReactTable from 'react-table';
 import makeAnimated from 'react-select/animated';
+import { useDownloadExcel } from 'react-export-table-to-excel';
 
 function Individual() {
 
@@ -45,6 +46,9 @@ function Individual() {
   ]
 
 
+  
+  const tableRef = useRef(null);
+
   const handleSelect = (e) => {
       setTeam(e.value)
     }
@@ -82,6 +86,13 @@ function Individual() {
           setBC('red')
         }
       }
+
+
+      const { onDownload } = useDownloadExcel({
+        currentTableRef: tableRef.current,
+        filename: 'Users table',
+        sheet: 'Users'
+    })
 
 return (
   <>
