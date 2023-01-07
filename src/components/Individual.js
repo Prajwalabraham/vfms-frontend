@@ -121,7 +121,7 @@ return (
 }
 </>}
   
-          <table className='IvTable'>
+          <table className='IvTable' ref={tableRef}>
       {fetched?
       <thead className='IVthead'>
         <tr className='IVtr'>
@@ -155,7 +155,8 @@ return (
     </table> 
 
 
- 
+  
+  <button onClick={onDownload}> Export excel </button>
   <button type="" onClick={Back}>Back</button>
 </div>
 </>
