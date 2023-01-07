@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import QRCode from 'qrcode'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CircularProgress from '@mui/material/CircularProgress';
 import './QrCodeGenerator.css'
 import Select from 'react-select';
@@ -45,7 +45,9 @@ const [WhatsappUrl, setWhatsappUrl] = useState('');
 
   ]
   
-
+  useEffect(() => {
+    document.title = 'QR Generator';
+  }, []);
 
 
   const [loading, setLoading] = useState(false);

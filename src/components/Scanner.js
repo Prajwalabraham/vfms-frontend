@@ -23,6 +23,9 @@ const Scanner = (props) => {
     document.title = 'QR Scanner';
   }, []);
 
+    
+
+
   const navigate = useNavigate()
   
   const handleScan = async(scanData) => {

@@ -31,6 +31,12 @@ function View() {
 
   ]
 
+  
+  useEffect(() => {
+    document.title = 'View';
+  }, []);
+
+
   useEffect(() => {
     const result =  axios({
       method:'post',

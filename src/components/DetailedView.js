@@ -36,6 +36,12 @@ function DetailedView() {
       {value:'Sound', label:'Sound'},
     ], [])
 
+      
+  useEffect(() => {
+    document.title = 'detailed View';
+  }, []);
+
+
     const handleSelect = (e) => {
         setTeam(e.value)
       }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './DetailedView.css'
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios'
@@ -18,6 +18,12 @@ function Individual() {
   const navigate = useNavigate();
 
   const animatedComponents = makeAnimated();
+
+    
+  useEffect(() => {
+    document.title = 'Individual';
+  }, []);
+
 
   const teams = [
     {value:'Greeters', label:'Greeters'},

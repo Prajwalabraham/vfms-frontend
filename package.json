@@ -29,6 +29,7 @@
     "react-select": "^5.7.0",
     "react-share": "^4.4.1",
     "react-table": "^7.8.0",
+    "recharts": "^2.2.0",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
     "sharethis-reactjs": "^1.6.0",
