@@ -37,7 +37,7 @@ class Form extends Component {
   var day = curTime.getDay();
   curTime = parseInt(curTime.getHours() + "" + ("0" + curTime.getMinutes()).substr(-2) + "" + ("0" + curTime.getSeconds()).substr(-2));
 
-  if (curTime > 134500 && day == 6 )
+  if (curTime > 103000 && day == 6 )
     this.setState({isSat:true})
   else
     this.setState({isSat:false})

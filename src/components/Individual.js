@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, useCallback} from 'react'
 import './DetailedView.css'
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios'
@@ -7,6 +7,7 @@ import Select from 'react-select';
 import ReactTable from 'react-table';
 import makeAnimated from 'react-select/animated';
 import { useDownloadExcel } from 'react-export-table-to-excel';
+import { CSVLink, CSVDownload } from "react-csv";
 
 function Individual() {
 
@@ -16,8 +17,8 @@ function Individual() {
   const [team, setTeam] = useState('');
   const [fetched, setFetched] = useState(false);
   const [bC, setBC] = useState('');
+  const [csv, setCsv] = useState([]);
   const navigate = useNavigate();
-
   const animatedComponents = makeAnimated();
 
     
@@ -25,6 +26,7 @@ function Individual() {
     document.title = 'Individual';
   }, []);
 
+  const arr = []
 
   const teams = [
     {value:'Greeters', label:'Greeters'},
@@ -51,6 +53,8 @@ function Individual() {
 
   const handleSelect = (e) => {
       setTeam(e.value)
+      console.log(arr);
+      console.log(csv);
     }
 
 
@@ -88,11 +92,16 @@ function Individual() {
       }
 
 
-      const { onDownload } = useDownloadExcel({
-        currentTableRef: tableRef.current,
-        filename: 'Users table',
-        sheet: 'Users'
-    })
+      useEffect(() => {
+        
+          data?.map((el, index)=>{
+            if (el.team == team) {
+              arr.push(el)
+            }
+           })
+         setCsv(arr)
+      }, [arr,data,team]);
+
 
 return (
   <>
@@ -151,12 +160,13 @@ return (
 </tbody>
 
 ))} 
-      
+
     </table> 
-
-
-  
-  <button onClick={onDownload}> Export excel </button>
+    {data &&
+<>
+      <CSVLink filename={`${team}.csv`} style={{textDecoration:"None"}} data={csv}><button> Export excel </button></CSVLink>;
+</>
+}
   <button type="" onClick={Back}>Back</button>
 </div>
 </>
