@@ -11,7 +11,6 @@ import Stack from '@mui/material/Stack';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import makeAnimated from 'react-select/animated';
-import {InlineShareButtons} from 'sharethis-reactjs';
 
 
 function QrCodeGenerator() {
@@ -26,7 +25,6 @@ function QrCodeGenerator() {
   const [err, setErr] = useState(false);
   const [errMsg, seterrMsg] = useState('');
   const [success, setSuccess] = useState(false);
-  const [WhatsappUrl, setWhatsappUrl] = useState('');
 
 const teams = [
   {value:'Greeters', label:'Greeters'},
@@ -243,7 +241,9 @@ const handleSuccess = (e) =>{
       // download QR code
     
   return (
+    <>
     <div className='login-box'>
+    <h2>QR Code Generator</h2>
       {err ? 
        <div>
        <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
@@ -274,9 +274,19 @@ const handleSuccess = (e) =>{
           </div>
 : 
         <form onSubmit={GenerateQRCode}>
-          <input name='name' id='name' placeholder='Full Name' pattern="^(\w+)\s(\w+)$" value={state.name} onChange={handleChange} required />
-            <input name='phone' id='phone' placeholder='Phone' type='tel' pattern="(6|7|8|9)\d{9}$" value={state.phone} onChange={handleChange} required='true'/>
-            <input name='email' id='mail' placeholder='Email' type='email'  value={state.email} onChange={handleChange} required />
+          
+            <div className="user-box">
+              <input name='name' id='name'  pattern="^(\w+)\s(\w+)$" value={state.name} onChange={handleChange} required />
+              <label>Your Full Name</label>
+            </div>
+            <div className="user-box">
+              <input name='phone' id='phone'  type='tel' pattern="(6|7|8|9)\d{9}$" value={state.phone} onChange={handleChange} required='true'/>
+              <label>Your Phone</label>
+            </div>
+            <div className="user-box">
+              <input name='email' id='mail'  type='email'  value={state.email} onChange={handleChange} required />
+              <label>Your Email</label>
+            </div>
               <br/>
             <Select
               className='SelectTeam'
@@ -302,7 +312,7 @@ const handleSuccess = (e) =>{
         />
       <br/>       
     </div>
-
+</>
   )
 }
 

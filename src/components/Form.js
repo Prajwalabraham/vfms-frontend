@@ -188,15 +188,15 @@ class Form extends Component {
           :
 
           <form onSubmit={handleSubmit} >
-            <div class="user-box">
+            <div className="user-box">
               <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} required='true'/>
               <label>Your Name *</label>
             </div>
-            <div class="user-box">
+            <div className="user-box">
               <input name="phone" type='tel' pattern="(6|7|8|9)\d{9}$"  value={this.state.phone} onChange={this.handlePhoneChange} required='true' />
               <label>Phone Number *</label>
             </div>
-            <div class='wrapper'>
+            <div className='wrapper'>
               <input type="radio" name="select" id="option-1" value='NON-VEG' checked={this.state.preference === 'NON-VEG'} onChange={this.onValueChange} />
                 <input type="radio" name="select" id="option-2" value='VEG' checked={this.state.preference === 'VEG'} onChange={this.onValueChange} />
                   <label for="option-1" className="option option-1">
