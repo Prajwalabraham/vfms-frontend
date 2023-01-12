@@ -176,7 +176,7 @@ class Form extends Component {
             <Alert severity="error">
               <AlertTitle>Oops!!</AlertTitle>
               <span style={{display:"block"}}>Sorry {this.state.data.name},</span>
-              <span> {this.state.errorMsg} </span>
+              <span style={{display:"block"}} > {this.state.errorMsg} </span>
               <strong>{this.state.data.preference}</strong>
             </Alert>
           </Stack>
@@ -195,7 +195,7 @@ class Form extends Component {
               <br/>
               <span style={{display:"block"}} >Hey {this.state.data.name},</span>
               <br/>
-              <span> Thank you for Submitting </span>
+              <span style={{display:"block"}} > Thank you for Submitting </span>
               <strong>Your choice is {this.state.data.preference}</strong>
             </Alert>
           </Stack>
