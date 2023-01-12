@@ -241,3 +241,7 @@ html {
   img{
     image-rendering: auto;
   }
+
+  .spanM{
+    white-space: nowrap;
+  }

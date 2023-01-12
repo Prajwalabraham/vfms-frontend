@@ -65,17 +65,11 @@ const teams = [
       height:2000
 		}, (err, value) => {
 			if (err) return console.error(err)
-
 			console.log(value)
 			setQr(value)
       console.log(data);
-      
-		})
-    
-
-    
+		})    
 	}
-
 
     function handleChange(event) {
         const res = event.target.value;
@@ -123,8 +117,6 @@ const teams = [
           })
         }
         // Create the email payload with the QR code image as an attachment
-        
-        
       })
       .catch(err => {
         console.log(err);
@@ -155,36 +147,8 @@ const teams = [
   }
 
   const handleShare = async(e)=>{
-    /*
-    const file = new Blob([qr], {type: "image/png"})
-    console.log(file);
-    const data = {
-      files: [
-        new File([file], 'image.png', {
-          type: file.type,
-        }),
-      ],
-      title: 'QRCode',
-      text: 'YourQRCode',
-    };
-    const fileUrl = URL.createObjectURL(file)
-    setWhatsappUrl(fileUrl)
-    console.log(fileUrl);
-    console.log(file);
-    if(navigator.share) {
-      await navigator.share({
-        title: "title",
-        text: "your text",
-        url: fileUrl,
-        files: [data]     
-      })
-        .then(() => console.log('Successful share'))
-        .catch((error) => console.log('Error in sharing', error));
-    }else {
-      console.log(`system does not support sharing files.`);
-    }
-    
-*/
+
+
   }
 
 const email = document.getElementById("mail");
@@ -226,7 +190,6 @@ const handleError = (e) =>{
   setErr(false)
   seterrMsg('')
   setState({
-    
     name:'',
     phone:'',
     email:''
@@ -259,7 +222,7 @@ const handleSuccess = (e) =>{
       </div>
       :
       <>
-{success? 
+{success ? 
   <div>
            <span><img src="https://user-images.githubusercontent.com/74299799/209782500-1ef43bd6-dadf-478c-b1e2-b89ecf05428d.png" alt={<CheckCircleOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "green" }} />} /></span>
            <br/>
@@ -304,7 +267,7 @@ const handleSuccess = (e) =>{
 }
         {qr && <>
 				<img src={qr} alt='' className='qrimg' id='can'/>
-        <a href={qr} download={`${state.name}.png`} ><button value="Download" >Download</button></a>
+        <a href={qr} download={`${state.name}.png`} ><button value="Download">Download</button></a>
 			</>}
       
       {loading ?  <CircularProgress /> :

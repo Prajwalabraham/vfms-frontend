@@ -7,6 +7,8 @@ import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
+import Svg from './Ok.gif'
+import SorrySvg from './Feeling sorry.gif'
 
 class Form extends Component {
   constructor(props) {
@@ -20,7 +22,8 @@ class Form extends Component {
        error: false,
        errMsg: '',
        success:false,
-       isSat:false
+       isSat:false,
+       data:[]
     }
   }
   
@@ -69,7 +72,8 @@ class Form extends Component {
     const handleError = (e) => {
       this.setState({
         error:false,
-        errorMsg: ''
+        errorMsg: '',
+        data:[]
       })
     }
     
@@ -93,22 +97,31 @@ class Form extends Component {
       data: this.state
     })
     .then(res => {
+      console.log(res);
       if (res.status==201) {
         this.setState({success:true})
+        this.setState({
+          data:res.data.rows[0]
+        },
+        ()=>{
+          console.log(this.state.data);
+        }
+        )
       }
-      this.setState({
-        name: '',
-        preference: '',
-        phone: '',
-        loading: false
-      })
       
     })
     .catch(err => {
       console.log(err);
       if (err.response.status==406) {
         this.setState({error:true})
-        this.setState({errorMsg:'You have already submitted the form this week...!'})
+        this.setState({errorMsg:'But you have already given your food choice for this week as'})
+        this.setState({
+          data: err.response.data.rows[0],
+        },
+        ()=>{
+          console.log(this.state.data);
+        }
+        )
       }
       else if(err.response.status==403){
         this.setState({error:true})
@@ -119,7 +132,6 @@ class Form extends Component {
         alert('There is an internal Server error. Kindly report to the IT team')
       }
     })
-
   }
   
   this.setState({
@@ -127,7 +139,6 @@ class Form extends Component {
     preference: '',
     phone: '',
     loading: false
-
   })
   }
     return (
@@ -139,7 +150,7 @@ class Form extends Component {
        <br />
        <br />
         <div className='Formimg'>
-          <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
+          <span><img src={SorrySvg} alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} style={{borderRadius: '50%'}} /></span>
           <br/>
           <Stack sx={{ width: '100%' }} spacing={2}>
           <Alert severity="error">
@@ -159,12 +170,14 @@ class Form extends Component {
           {this.state.error?
           
           <div className='Formimg'>
-           <span><img src="https://user-images.githubusercontent.com/74299799/209782507-c470b66c-4666-481a-a187-01ddc9992625.png" alt={<ErrorOutlineOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "red" }} />} /></span>
+          <span><img src={SorrySvg} alt="" style={{borderRadius: '50%'}}/> </span>
            <br/>
            <Stack sx={{ width: '100%' }} spacing={2}>
             <Alert severity="error">
-              <AlertTitle>Error</AlertTitle>
-              {this.state.errorMsg}
+              <AlertTitle>Oops!!</AlertTitle>
+              <span style={{display:"block"}}>Sorry {this.state.data.name},</span>
+              <span> {this.state.errorMsg} </span>
+              <strong>{this.state.data.preference}</strong>
             </Alert>
           </Stack>
            <button type="" onClick = {handleError}>Back</button>
@@ -174,12 +187,16 @@ class Form extends Component {
           <>
           {this.state.success? 
            <div className='Formimg'>
-           <span><img src="https://user-images.githubusercontent.com/74299799/209782500-1ef43bd6-dadf-478c-b1e2-b89ecf05428d.png" alt={<CheckCircleOutlinedIcon sx={{ fontSize: 210 }}  style={{ color: "green" }} />} /></span>
+           <span><img src={Svg} alt="" style={{borderRadius: '50%'}}/></span>
            <br/>
            <Stack sx={{ width: '100%' }} spacing={2}>
             <Alert severity="success">
-              <AlertTitle>Success</AlertTitle>
-              <strong>Successfully Submitted</strong>
+              <AlertTitle><strong>Successfully Submitted</strong></AlertTitle>
+              <br/>
+              <span style={{display:"block"}} >Hey {this.state.data.name},</span>
+              <br/>
+              <span> Thank you for Submitting </span>
+              <strong>Your choice is {this.state.data.preference}</strong>
             </Alert>
           </Stack>
            <button type="" onClick = {handleSuccess}>Back</button>

@@ -13,7 +13,7 @@ function Success() {
   
   return (
     <div className='login-box'>
-        <span><ThumbUpAltRoundedIcon sx={{ fontSize: 210 }} style={{ color: "green" }}  /></span>
+        <span></span>
         <h2>Successfully Taken</h2>
     <br/>
         <table className='tTable'>
