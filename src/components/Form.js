@@ -162,7 +162,6 @@ class Form extends Component {
        </div>
       </>
       :
-
         <div class="login-box">
           <h2>Food Preference</h2>
           <br />
@@ -176,7 +175,7 @@ class Form extends Component {
             <Alert severity="error">
               <AlertTitle>Oops!!</AlertTitle>
               <span style={{display:"block"}}>Sorry {this.state.data.name},</span>
-              <span style={{display:"block"}} > {this.state.errorMsg} </span>
+              <span style={{display:"block"}}> {this.state.errorMsg} </span>
               <strong>{this.state.data.preference}</strong>
             </Alert>
           </Stack>

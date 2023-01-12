@@ -28,8 +28,9 @@ function View() {
     {value:'Parking', label:'Parking'},
     {value:'Projection', label:'Projection'},
     {value:'Sound', label:'Sound'},
-    {value:'Kitchen', label:'Kitchen'}
-
+    {value:'Kitchen', label:'Kitchen'},
+    {value:'Worship-Band', label:'Worship Band'},
+    {value:'Worship-Choir', label:'Worship Choir'},
   ]
   
   useEffect(() => {
