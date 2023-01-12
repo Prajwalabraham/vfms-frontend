@@ -56,7 +56,7 @@ const teams = [
 
 	const GenerateQRCode = (e) => {
     e.preventDefault()
-
+    console.log(value);
     QRCode.toDataURL(value, {
 			margin: 2,
 			color: {
@@ -149,7 +149,66 @@ const teams = [
   }
 
   const handleShare = async(e)=>{
-
+    const Authorization = "Bearer xxx"
+    const type = 'image/png' // Image type (cannot be gif due to API restriction!)
+    const baseUrl = "https://graph.facebook.com/v15.0/xxx" // Phone number of sender
+    const recipient = "xxx" // Phone number of recipient
+  
+    /** This function creates a File object from an img element which has a base64 image */
+    function fileFromImg(img) {
+      var byteString = atob(img.src.split(',')[1]);
+      var arrayBuffer = new ArrayBuffer(byteString.length);
+      var arr = new Uint8Array(arrayBuffer);
+      for (var i = 0; i < byteString.length; i++) {
+        arr[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([arrayBuffer], { type });
+      return new File([blob], "qr.png", { type })
+    }
+  
+    /** This function will upload a File and call the given callback with the result */
+    function sendFile(f, callback) {
+      const url = baseUrl + "/media";
+      const formData = new FormData()
+      formData.append('file', f)
+      formData.append('type', type)
+      formData.append('messaging_product', "whatsapp")
+  
+      fetch(url, {
+          method: 'POST',
+          body: formData,
+          headers: { Authorization }
+      })
+      .then(r => r.json())
+      .then(callback)
+      .catch(console.error)
+    }
+  
+    /** This takes in a successful upload and sends that forward to receiver */
+    function handleResponse(response) {
+      // When it works response will look like {"id": "xxx"}
+      fetch(baseUrl + "/messages", {
+        method: 'POST',
+        body: JSON.stringify({
+          "messaging_product": "whatsapp",
+          "recipient_type": "individual",
+          "to": recipient,
+          "type": "image",
+          "image": response
+        }),
+        headers: { Authorization, "Content-Type": "application/json" }
+      })
+      .then(r => r.json())
+      .then(r => console.log(r))
+      .catch(console.error)
+    }
+  
+    // I choose to trigger the sending when anything is clicked
+    document.addEventListener("click", () => {
+      const img = document.querySelector("img")
+      const file = fileFromImg(img)
+      sendFile(file, handleResponse)
+    })
 
   }
 
@@ -275,6 +334,7 @@ const handleSuccess = (e) =>{
       {loading ?  <CircularProgress /> :
       <button onClick={handleSubmit}>Submit</button>}
         />
+        <button type="" onClick={handleShare}>Share</button>
       <br/>       
     </div>
 </>
