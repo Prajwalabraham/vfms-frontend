@@ -13,7 +13,7 @@ function Success() {
   
   return (
     <div className='login-box'>
-        <span></span>
+        <span><img src="https://imgur.com/F8UoJBd" alt="" /></span>
         <h2>Successfully Taken</h2>
     <br/>
         <table className='tTable'>
